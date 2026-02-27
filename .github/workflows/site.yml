@@ -1,0 +1,54 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout LinxISA/linx-isa
+        uses: actions/checkout@v4
+        with:
+          repository: LinxISA/linx-isa
+          ref: main
+          path: linx-isa
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: python -m pip install --upgrade pip mkdocs-material
+
+      - name: Build docs (MkDocs)
+        working-directory: linx-isa
+        run: mkdocs build --strict
+
+      - name: Record source revision
+        id: source
+        working-directory: linx-isa
+        run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: linx-isa/site
+          force_orphan: true
+          enable_jekyll: false
+          commit_message: "docs: update from LinxISA/linx-isa@${{ steps.source.outputs.sha }}"
+
