@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_b_dim]]
+==== B.DIM
+
+*Syntax:* B.DIM RegSrc, uimm, ->LB1
+
+*Description:* -
+
+*Encoding:*
+
+image::../generated/encodings/enc_b_dim.svg[B.DIM encoding,width=800]
+
+*Uop-Class:* CMD
+
+*Compression:* L32 (len=32)
+
+*Uop-Class payload:* `{"cmd_kind": "BLOCK_ARGUMENT", "note": "User confirmed A", "source": "group_rule", "uop_kind": "CMD"}`

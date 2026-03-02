@@ -1,0 +1,47 @@
+= Linx Instruction Set Architecture Manual (v0.3)
+:doctype: book
+:toc: left
+:toclevels: 4
+:sectnums:
+:sectnumlevels: 5
+:icons: font
+:source-highlighter: rouge
+:experimental:
+:reproducible:
+:lang: en
+:listing-caption: Listing
+:table-caption: Table
+:figure-caption: Figure
+:xrefstyle: short
+:stem: latexmath
+
+// Keep paths relative to this file.
+:imagesdir: images
+
+// Manual metadata (override when publishing).
+:revnumber: v0.3
+:revdate: {localdate}
+
+include::chapters/00_preamble.adoc[]
+include::chapters/01_introduction.adoc[]
+include::chapters/02_programming_model.adoc[]
+include::chapters/03_encoding_and_formats.adoc[]
+include::chapters/04_block_isa.adoc[]
+include::chapters/05_assembly_conventions.adoc[]
+include::chapters/06_templates.adoc[]
+include::chapters/07_tile_blocks.adoc[]
+include::chapters/07b_isa_overview.adoc[]
+include::chapters/08_memory_operations.adoc[]
+include::chapters/09_system_and_privilege.adoc[]
+include::chapters/10_agu.adoc[]
+include::chapters/11_alu.adoc[]
+include::chapters/12_fsu.adoc[]
+include::chapters/13_amo.adoc[]
+include::chapters/14_bbd.adoc[]
+include::chapters/15_bru.adoc[]
+include::chapters/16_cmd.adoc[]
+include::chapters/18_sys.adoc[]
+include::chapters/19_vec.adoc[]
+include::chapters/90_instruction_reference.adoc[]
+include::chapters/91_instruction_block_isa.adoc[]
+include::chapters/99_appendix_spec.adoc[]

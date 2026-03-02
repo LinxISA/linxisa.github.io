@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_ssrget]]
+==== SSRGET
+
+*Syntax:* ssrget SSR_ID, ->{t, u, Rd}
+
+*Description:* -
+
+*Encoding:*
+
+image::../generated/encodings/enc_ssrget.svg[SSRGET encoding,width=800]
+
+*Uop-Class:* SYS
+
+*Compression:* L32 (len=32)
+
+*Uop-Class payload:* `{"note": "User confirmed A", "source": "group_rule", "sys_kind": "SSR", "uop_kind": "SYS"}`

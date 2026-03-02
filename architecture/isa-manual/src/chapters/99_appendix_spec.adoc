@@ -1,0 +1,35 @@
+[[appendix]]
+== Appendix: Spec artifacts and regeneration
+
+[[appendix-artifacts]]
+=== Artifacts in this repo
+
+The Linx ISA specification is tracked in multiple forms:
+
+* Golden sources (authoritative): `isa/v0.3/`
+* Canonical machine-readable catalog (checked in): `isa/v0.3/linxisa-v0.3.json`
+* Generated codec tables: `isa/generated/codecs/linxisa{16,32,48,64}.decode`
+* Generated C tables: `isa/generated/codecs/linxisa_opcodes.{h,c}`
+
+[[appendix-regenerate]]
+=== Regenerating the catalog and codecs
+
+From the repo root:
+
+[source,bash]
+----
+python3 tools/isa/build_golden.py --in isa/v0.3 --out isa/v0.3/linxisa-v0.3.json --pretty
+python3 tools/isa/gen_qemu_codec.py --spec isa/v0.3/linxisa-v0.3.json --out-dir isa/generated/codecs
+python3 tools/isa/gen_c_codec.py --spec isa/v0.3/linxisa-v0.3.json --out-dir isa/generated/codecs
+python3 tools/isa/validate_spec.py --spec isa/v0.3/linxisa-v0.3.json
+----
+
+[[appendix-build-manual]]
+=== Building this manual
+
+From `docs/architecture/isa-manual/`:
+
+[source,bash]
+----
+make pdf
+----

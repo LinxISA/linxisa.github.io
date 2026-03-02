@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_hl_casb]]
+==== HL.CASB
+
+*Syntax:* hl.casb<.{aq, rl, f, aqrl, aqf, rlf, aqrlf}> [SrcL], SrcR, SrcD, ->{t, u, Rd}
+
+*Description:* Long (48-bit) instruction encoding.
+
+*Encoding:*
+
+image::../generated/encodings/enc_hl_casb.svg[HL.CASB encoding,width=800]
+
+*Uop-Class:* AMO
+
+*Compression:* HL48 (len=48)
+
+*Uop-Class payload:* `{"amo_kind": "CAS", "note": "User confirmed A", "source": "group_rule", "uop_kind": "AMO"}`

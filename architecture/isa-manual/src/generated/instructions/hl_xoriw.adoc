@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_hl_xoriw]]
+==== HL.XORIW
+
+*Syntax:* hl.xoriw SrcL, simm, ->{t, u, Rd}
+
+*Description:* Long (48-bit) instruction encoding.
+
+*Encoding:*
+
+image::../generated/encodings/enc_hl_xoriw.svg[HL.XORIW encoding,width=800]
+
+*Uop-Class:* ALU
+
+*Compression:* HL48 (len=48)
+
+*Uop-Class payload:* `{"source": "group_rule", "uop_kind": "ALU"}`

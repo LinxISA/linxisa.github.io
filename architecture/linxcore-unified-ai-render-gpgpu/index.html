@@ -1,0 +1,1771 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Linx Instruction Set Architecture">
+      
+      
+      
+        <link rel="canonical" href="https://linxisa.github.io/architecture/linxcore-unified-ai-render-gpgpu/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../isa-manual/src/images/linxisa-logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>LinxCore Unified AI + Rendering (GPU-class) Co-Design Draft - LinxISA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#linxcore-unified-ai-rendering-gpu-class-co-design-draft" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="LinxISA" class="md-header__button md-logo" aria-label="LinxISA" data-md-component="logo">
+      
+  <img src="../isa-manual/src/images/linxisa-logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LinxISA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              LinxCore Unified AI + Rendering (GPU-class) Co-Design Draft
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LinxISA/linx-isa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LinxISA/linx-isa
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="LinxISA" class="md-nav__button md-logo" aria-label="LinxISA" data-md-component="logo">
+      
+  <img src="../isa-manual/src/images/linxisa-logo.svg" alt="logo">
+
+    </a>
+    LinxISA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LinxISA/linx-isa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LinxISA/linx-isa
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/GETTING_STARTED/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../v0.3-architecture-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.3 Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../isa-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISA Manual (AsciiDoc)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../v0.4-draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.4 Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bring-up
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bring-up
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/GATE_STATUS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/CHECK26_CONTRACT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check26 Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../bringup/MATURITY_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maturity Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/linxisa-assembly-agent-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assembly Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/linxisa-call-ret-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Call/Ret Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/encoding_space_report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encoding Space Report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Releases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.3.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../project/repository-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-design-goals-what-gpu-class-means" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Design goals (what “GPU-class” means)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Design goals (what “GPU-class” means)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Goals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-goals-initially" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-goals (initially)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-reality-check" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance reality check
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-proposed-top-level-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Proposed top-level stack
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Proposed top-level stack">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-user-facing-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.1 User-facing APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-user-mode-driver-plan-mesa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.2 User-mode driver plan (Mesa)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-kernel-driver-plan-linux-drm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1.3 Kernel driver plan (Linux DRM)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-execution-model-build-on-linxisa-v03-simt-vector-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Execution model: build on LinxISA v0.3 SIMT vector blocks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Execution model: build on LinxISA v0.3 SIMT vector blocks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-the-core-idea-isa-grounded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 The core idea (ISA-grounded)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#211-proposed-linxgpgpu-group-warp-like-microarchitecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1.1 Proposed LinxGPGPU group (warp-like) microarchitecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-lb0-lane_count-policy-vec-width" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 LB0 lane_count policy &amp; VEC width
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-memory-execution-reality-local-vs-brg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Memory execution reality: .local vs .brg
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-hardware-partitioning-inside-linxcore-gpu-tile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Hardware partitioning inside “LinxCore GPU tile”
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Hardware partitioning inside “LinxCore GPU tile”">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-always-needed-engines-compute-first-baseline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Always needed engines (compute-first baseline)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-rendering-acceleration-engines-hardened-fixed-function" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Rendering acceleration engines (hardened fixed-function)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-how-this-fits-linxcore-block-semantics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.3 How this fits LinxCore block semantics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-compiler-pipeline-details-mesa-linx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Compiler pipeline details (Mesa → Linx)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Compiler pipeline details (Mesa → Linx)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-front-end-inputs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Front-end inputs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-mid-end-nir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.2 Mid-end: NIR
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-back-end-nirspir-v-linx-vector-block-body-vec-lowering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.3 Back-end: NIR/SPIR-V → Linx vector-block body (+ VEC lowering)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ai-mapping-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. AI mapping strategy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. AI mapping strategy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-unify-on-vulkan-compute-where-possible" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Unify on Vulkan compute where possible
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-optional-dedicated-tensormma-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Optional: dedicated Tensor/MMA engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-bring-up-plan-recommended-milestones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Bring-up plan (recommended milestones)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-open-questions-backlog-we-will-answer-one-by-one" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Open questions backlog (we will answer one by one)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Open questions backlog (we will answer one by one)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-product-targets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Product targets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-isa-micro-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. ISA / micro-architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-fixed-function-hardening" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Fixed-function hardening
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-software-choices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Software choices
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-next-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Next action
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="linxcore-unified-ai-rendering-gpu-class-co-design-draft">LinxCore Unified AI + Rendering (GPU-class) Co-Design Draft<a class="headerlink" href="#linxcore-unified-ai-rendering-gpu-class-co-design-draft" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p>Status: draft / working doc</p>
+<p>Goal: define a software+hardware co-design that lets <strong>LinxISA + LinxCore</strong> run
+- AI applications (inference first, training later)
+- graphics rendering (Vulkan/OpenGL)</p>
+<p>by compiling shader/compute kernels to a <strong>Linx SIMT model</strong> deployed onto a <strong>vector (VEC) execution backend</strong>, while hardening selected hot paths into dedicated <strong>LinxCore “engines”</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="0-design-goals-what-gpu-class-means">0. Design goals (what “GPU-class” means)<a class="headerlink" href="#0-design-goals-what-gpu-class-means" title="Permanent link">&para;</a></h2>
+<h3 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>One ISA + one runtime model</strong> to serve both graphics + AI compute.</li>
+<li><strong>Vulkan as the primary user-facing ABI</strong> (graphics + compute).</li>
+<li>Support OpenGL via <strong>Zink</strong> (OpenGL-on-Vulkan) if acceptable.</li>
+<li>Compiler pipeline: <strong>SPIR-V → NIR → LinxSIMT IR → LinxVEC uops</strong>.</li>
+<li>Hardware: add/extend LinxCore with a <strong>command processor + shader/compute core + fixed-function engines</strong>.</li>
+</ul>
+<h3 id="non-goals-initially">Non-goals (initially)<a class="headerlink" href="#non-goals-initially" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Perfect parity with a top-tier discrete GPU across all workloads.</li>
+<li>Full DirectX user-mode stack.</li>
+</ul>
+<h3 id="performance-reality-check">Performance reality check<a class="headerlink" href="#performance-reality-check" title="Permanent link">&para;</a></h3>
+<p>“Not worse than GPU” is only achievable if we define (and measure) a baseline:
+- baseline <strong>GPU compute core</strong> model (e.g. NVIDIA <em>SM</em>, AMD <em>CU/WGP</em>, Apple GPU core) and the <strong>per-core</strong> throughput we want to match
+- target workloads (AI: GEMM/conv/attn? graphics: forward? deferred? RT?)
+- per-core memory hierarchy targets (register file + L1/texture + LDS/shared) and the <strong>chip-level</strong> bandwidth / power / area envelope</p>
+<p><strong>Assumption from discussion:</strong> we are designing a <strong>core</strong> comparable to a GPU SM, and scaling out via <strong>many cores</strong> to form a new-style GPGPU.</p>
+<hr />
+<h2 id="1-proposed-top-level-stack">1. Proposed top-level stack<a class="headerlink" href="#1-proposed-top-level-stack" title="Permanent link">&para;</a></h2>
+<h3 id="11-user-facing-apis">1.1 User-facing APIs<a class="headerlink" href="#11-user-facing-apis" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Vulkan</strong>: primary graphics+compute API.</li>
+<li><strong>OpenGL</strong> (optional): via Mesa <strong>Zink</strong> (Gallium OpenGL frontend → Vulkan).</li>
+<li>Advantage: avoid writing a full OpenGL driver; focus on Vulkan + compute.</li>
+</ul>
+<h3 id="12-user-mode-driver-plan-mesa">1.2 User-mode driver plan (Mesa)<a class="headerlink" href="#12-user-mode-driver-plan-mesa" title="Permanent link">&para;</a></h3>
+<p>Use Mesa (now vendored as <code>lib/mesa3d</code>) and add a Linx Vulkan driver:
+- Mesa areas you’ll touch:
+  - <code>src/vulkan/</code> (common Vulkan runtime, WSI, layers/util)
+  - <code>src/compiler/spirv/</code> (SPIR-V parsing → NIR)
+  - <code>src/compiler/nir/</code> (NIR IR + optimizations)
+  - (optional) <code>src/gallium/drivers/zink/</code> (OpenGL-on-Vulkan)</p>
+<p>Create a new driver namespace (exact location TBD; typical patterns are vendor directories):
+- <code>src/linx/vulkan/</code> or <code>src/vulkan/drivers/linx/</code> (depends on Mesa conventions)</p>
+<p>Deliverables:
+- <code>libvulkan_linx.so</code> ICD (Mesa)
+- WSI path for Linux (DRM/KMS + Wayland/X11 as needed)</p>
+<h3 id="13-kernel-driver-plan-linux-drm">1.3 Kernel driver plan (Linux DRM)<a class="headerlink" href="#13-kernel-driver-plan-linux-drm" title="Permanent link">&para;</a></h3>
+<p>A Linx GPU/NPU kernel driver providing:
+- memory management (GEM/TTM or modern equivalent)
+- submission queues
+- sync primitives (timeline semaphores/fences)
+- perf counters + debugging IOCTLs</p>
+<p>This enables:
+- Mesa Vulkan ICD talks to DRM
+- user-space apps use standard Vulkan loader</p>
+<hr />
+<h2 id="2-execution-model-build-on-linxisa-v03-simt-vector-blocks">2. Execution model: build on LinxISA v0.3 SIMT vector blocks<a class="headerlink" href="#2-execution-model-build-on-linxisa-v03-simt-vector-blocks" title="Permanent link">&para;</a></h2>
+<p>LinxISA already defines SIMT-style execution via <strong>vector block types</strong> (<code>MSEQ/MPAR/VSEQ/VPAR</code>) rather than a separate “GPU mode”.</p>
+<p>Reference notes: <code>docs/architecture/research/linxisa-v0.3-simt-vector-model.md</code></p>
+<h3 id="21-the-core-idea-isa-grounded">2.1 The core idea (ISA-grounded)<a class="headerlink" href="#21-the-core-idea-isa-grounded" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Programmer-visible model: <strong>SIMT</strong> expressed as a <em>one-lane body</em> replayed over a lane space.</li>
+<li>Hardware backend: implement that replay efficiently on <strong>VEC</strong> pipelines.</li>
+</ul>
+<p>Architectural mapping (strict v0.3):
+- Lane space is defined by <code>LB0..LB2</code> (written by <code>B.DIM</code>), with lane counters <code>lc0..lc2</code> visible in the body.
+- Canonical 1-D lowering:
+  - <code>LB0 = lane_count</code> (lanes per group)
+  - <code>LB1 = group_count</code>
+  - linear lane index = <code>lc0 + lc1 * lane_count</code>
+- Scalar instructions in a vector body are <strong>uniform per group</strong> (execute once per group replay), while vector instructions operate in the lane domain.</p>
+<p>Execution families:
+- <code>MSEQ/MPAR</code>: may use bridged global memory (<code>*.brg</code>) via the tile/TMA path.
+- <code>VSEQ/VPAR</code>: <strong>tile-only</strong> (must not use <code>*.brg</code>).</p>
+<h3 id="211-proposed-linxgpgpu-group-warp-like-microarchitecture">2.1.1 Proposed LinxGPGPU group (warp-like) microarchitecture<a class="headerlink" href="#211-proposed-linxgpgpu-group-warp-like-microarchitecture" title="Permanent link">&para;</a></h3>
+<p>Assumption (from current design direction):
+- One <strong>group</strong> (≈ NVIDIA warp concept) consists of:
+  - <strong>64 vector lanes</strong>, each lane is primarily <strong>32-bit</strong> datapath
+  - <strong>1 scalar-uniform lane</strong> (per group), <strong>64-bit</strong> datapath
+  - a <strong>64-bit predicate/mask</strong> used by the scalar lane to control the group’s control flow / lane activity</p>
+<p>Mapping to LinxISA semantics:
+- Set <code>LB0 = 64</code> for <code>lane_count</code>.
+- Use <code>lc0</code> as the lane id in <code>[0..63]</code>.
+- Use <code>lc1</code> as the group id (warp id) when multiple groups are dispatched (<code>LB1 = group_count</code>).</p>
+<p>Important contract alignment:
+- This is consistent with strict v0.3’s “scalar-uniform per group” rule.
+- We must explicitly define how the <strong>64-bit lane mask</strong> interacts with v0.3’s inactive-lane policy (<code>merge</code> vs <code>zero</code>) and how it is set/updated by the shader compiler/runtime.</p>
+<h3 id="22-lb0-lane_count-policy-vec-width">2.2 <code>LB0</code> lane_count policy &amp; VEC width<a class="headerlink" href="#22-lb0-lane_count-policy-vec-width" title="Permanent link">&para;</a></h3>
+<p>Critical decisions (implementation policy; ISA allows variability):
+- Choose a <strong>lane_count policy</strong> (<code>LB0</code>, lanes per group). Common candidates: 8/16/32/64.
+- Choose a <strong>VEC width</strong> (lanes per cycle) and how many VEC pipes per core.</p>
+<p>Rules of thumb:
+- Larger <code>LB0</code> amortizes scalar-uniform work and improves reduction/shuffle efficiency, but increases pressure from lane divergence that must be handled via <strong>predication</strong> (lane predicate values + <code>V.CSEL</code>/<code>V.PSEL</code>).
+- VEC width should align with the <code>.brg</code> memory bridge/coalescing granularity and the tile-register banking scheme.</p>
+<h3 id="23-memory-execution-reality-local-vs-brg">2.3 Memory execution reality: <code>.local</code> vs <code>.brg</code><a class="headerlink" href="#23-memory-execution-reality-local-vs-brg" title="Permanent link">&para;</a></h3>
+<p>Architecturally, vector memory operations split into:
+- <strong><code>.local</code></strong>: tile/local direction accesses (base: <code>TA/TB/TO/TS</code>), suitable for tile engines + scratch.
+- <strong><code>.brg</code></strong>: bridged global memory accesses (base: <code>ri*</code> imported via <code>B.IOR</code>).</p>
+<p>Bring-up constraints:
+- <code>VPAR/VSEQ</code> are tile-only and MUST NOT use <code>.brg</code>.
+- <code>MSEQ/MPAR</code> may use <code>.brg</code> but the path is <strong>bridged through tile/TMA</strong>, so the “shader core” microarchitecture must treat global memory as an engine/bridge, not a free LSU.</p>
+<p>Implementation goal:
+- coalesce <code>.brg</code> accesses across lanes/groups (merge cacheline requests, handle scatter/gather efficiently, and define per-lane fault/disable behavior consistently with the restartability contracts).</p>
+<hr />
+<h2 id="3-hardware-partitioning-inside-linxcore-gpu-tile">3. Hardware partitioning inside “LinxCore GPU tile”<a class="headerlink" href="#3-hardware-partitioning-inside-linxcore-gpu-tile" title="Permanent link">&para;</a></h2>
+<p>Think of this as adding a GPU-like tile next to/inside LinxCore, controlled by command streams.</p>
+<h3 id="31-always-needed-engines-compute-first-baseline">3.1 Always needed engines (compute-first baseline)<a class="headerlink" href="#31-always-needed-engines-compute-first-baseline" title="Permanent link">&para;</a></h3>
+<p>1) <strong>Command Processor (CP)</strong>
+   - parses command buffers, dispatches work
+   - integrates with LinxCore block/BID completion rules (engine_done)</p>
+<p>2) <strong>Shader/Compute Core (SIMT front-end + VEC back-end)</strong>
+   - wave scheduler
+   - register file(s) for vector/scalar
+   - VEC ALU pipelines
+   - LSU + coalescer
+   - shared memory / LDS (optional but important for performance)</p>
+<p>3) <strong>DMA/BLT engine</strong>
+   - fast copies, format conversions, clears</p>
+<h3 id="32-rendering-acceleration-engines-hardened-fixed-function">3.2 Rendering acceleration engines (hardened fixed-function)<a class="headerlink" href="#32-rendering-acceleration-engines-hardened-fixed-function" title="Permanent link">&para;</a></h3>
+<p>Add when moving from compute-only → full graphics:
+- <strong>Raster / tiler / binning engine</strong> (triangle setup, tile list build)
+- <strong>Texture engine</strong> (addressing, filtering, sampler cache)
+- <strong>ROP engine</strong> (depth/stencil test, blending, color writeback/compression)</p>
+<p>A good staged approach is:
+- Phase A: compute + blit (enables AI + simple compute rendering paths)
+- Phase B: texture engine (huge for real graphics perf)
+- Phase C: raster + ROP (full pipeline)</p>
+<h3 id="33-how-this-fits-linxcore-block-semantics">3.3 How this fits LinxCore block semantics<a class="headerlink" href="#33-how-this-fits-linxcore-block-semantics" title="Permanent link">&para;</a></h3>
+<p>Use LinxCore’s established “block” mechanism:
+- a block issues CP/engine commands via CMD uops
+- block completion:
+  - <code>complete = scalar_done &amp;&amp; engine_done</code>
+- on flush/redirect: kill younger blocks by BID (<code>bid &gt; flush_bid</code>)</p>
+<p>This gives you CPU-style speculation/control + long-latency engine work with clean cancellation rules.</p>
+<hr />
+<h2 id="4-compiler-pipeline-details-mesa-linx">4. Compiler pipeline details (Mesa → Linx)<a class="headerlink" href="#4-compiler-pipeline-details-mesa-linx" title="Permanent link">&para;</a></h2>
+<h3 id="41-front-end-inputs">4.1 Front-end inputs<a class="headerlink" href="#41-front-end-inputs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SPIR-V for Vulkan shaders + compute kernels</li>
+<li>(optional) OpenCL C via clc → SPIR-V path, or MLIR → SPIR-V for AI</li>
+</ul>
+<h3 id="42-mid-end-nir">4.2 Mid-end: NIR<a class="headerlink" href="#42-mid-end-nir" title="Permanent link">&para;</a></h3>
+<p>Use NIR as the optimization hub:
+- algebraic opts, CSE, loop opts, vectorization/legalization passes
+- subgroup lowering and divergence-friendly transforms</p>
+<h3 id="43-back-end-nirspir-v-linx-vector-block-body-vec-lowering">4.3 Back-end: NIR/SPIR-V → Linx vector-block body (+ VEC lowering)<a class="headerlink" href="#43-back-end-nirspir-v-linx-vector-block-body-vec-lowering" title="Permanent link">&para;</a></h3>
+<p>Create/choose an internal IR that makes the <strong>Linx vector-block model</strong> explicit:
+- lane counters (<code>lc0..lc2</code>) and the canonical mapping to invocation IDs
+- group-uniform vs lane-varying values (scalar body ops vs <code>V.*</code> ops)
+- lane predicate values + predication strategy (<code>V.CSEL</code>/<code>V.PSEL</code>) for divergent control flow
+- subgroup ops: shuffles (<code>V.SHFL*</code>) and reductions (<code>V.RD*</code>)
+- <code>.local</code>/<code>.brg</code> memory selection and coalescing strategy for the bridged path</p>
+<p>Note: an <strong>exec-mask</strong> may still exist as a <em>microarchitectural</em> optimization, but it is not the primary architectural programming model in strict v0.3; the compiler should be correct using lane predicate values.</p>
+<p>Then lower to a machine model:
+- scalar ops (address calc, control)
+- vector ops (lane-wise ALU)
+- special function units (rcp/rsqrt/sin/cos) if you choose to harden</p>
+<hr />
+<h2 id="5-ai-mapping-strategy">5. AI mapping strategy<a class="headerlink" href="#5-ai-mapping-strategy" title="Permanent link">&para;</a></h2>
+<h3 id="51-unify-on-vulkan-compute-where-possible">5.1 Unify on Vulkan compute where possible<a class="headerlink" href="#51-unify-on-vulkan-compute-where-possible" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Many AI stacks can target Vulkan compute (via IREE/MLIR, TVM, custom backends)</li>
+<li>Key Vulkan features for AI performance:</li>
+<li>FP16/BF16/INT8</li>
+<li>subgroup ops</li>
+<li>cooperative matrix / MMA-like ops (if implemented)</li>
+</ul>
+<h3 id="52-optional-dedicated-tensormma-engine">5.2 Optional: dedicated Tensor/MMA engine<a class="headerlink" href="#52-optional-dedicated-tensormma-engine" title="Permanent link">&para;</a></h3>
+<p>If “GPU-class AI” is strict, consider hardening:
+- block GEMM / MMA datapaths
+- accumulator precision
+- shared memory/LDS bandwidth</p>
+<hr />
+<h2 id="6-bring-up-plan-recommended-milestones">6. Bring-up plan (recommended milestones)<a class="headerlink" href="#6-bring-up-plan-recommended-milestones" title="Permanent link">&para;</a></h2>
+<p>1) <strong>Functional model</strong> in sim/emulator: execute simple SPIR-V compute kernels.
+2) <strong>Mesa Vulkan ICD</strong> + Linux DRM minimal: <code>vkQueueSubmit</code> + fences + simple compute.
+3) <strong>Zink</strong> on top (optional): get OpenGL apps running quickly.
+4) Add <strong>texture engine</strong> + sampler cache.
+5) Add <strong>raster/ROP</strong> for full graphics perf.
+6) Perf pass: occupancy, register pressure, cache policy, tiling.</p>
+<hr />
+<h2 id="7-open-questions-backlog-we-will-answer-one-by-one">7. Open questions backlog (we will answer one by one)<a class="headerlink" href="#7-open-questions-backlog-we-will-answer-one-by-one" title="Permanent link">&para;</a></h2>
+<h3 id="a-product-targets">A. Product targets<a class="headerlink" href="#a-product-targets" title="Permanent link">&para;</a></h3>
+<ul>
+<li>What baseline GPU are we comparing to (class + bandwidth)?</li>
+<li>AI: inference only or training too? which models (LLM, CNN, diffusion)?</li>
+<li>Graphics: target API (Vulkan 1.1/1.2/1.3?), target resolution/FPS?</li>
+</ul>
+<h3 id="b-isa-micro-architecture">B. ISA / micro-architecture<a class="headerlink" href="#b-isa-micro-architecture" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Preferred <code>LB0</code> lane_count policy (8/16/32/64)? Fixed or variable?</li>
+<li>Vector width / number of VEC pipes / clock target?</li>
+<li>How much tile/local storage (tile regs + scratch/LDS-like) per core?</li>
+<li>Do we want an ISA/profile extension for per-lane control flow (exec-mask + reconvergence), or commit to predication-first shaders?</li>
+</ul>
+<h3 id="c-fixed-function-hardening">C. Fixed-function hardening<a class="headerlink" href="#c-fixed-function-hardening" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Which graphics stages must be fixed-function vs programmable?</li>
+<li>Texture formats + filtering requirements?</li>
+</ul>
+<h3 id="d-software-choices">D. Software choices<a class="headerlink" href="#d-software-choices" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Vulkan-only acceptable? OpenGL via Zink acceptable?</li>
+<li>Do we need OpenCL/CUDA compatibility?</li>
+</ul>
+<hr />
+<h2 id="8-next-action">8. Next action<a class="headerlink" href="#8-next-action" title="Permanent link">&para;</a></h2>
+<p>After each of your answers, we’ll update this doc into a concrete spec (interfaces + engine list + compiler contracts).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

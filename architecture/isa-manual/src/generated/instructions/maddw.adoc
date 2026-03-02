@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_maddw]]
+==== MADDW
+
+*Syntax:* maddw SrcL, SrcR, SrcD, ->{t, u, Rd}
+
+*Description:* -
+
+*Encoding:*
+
+image::../generated/encodings/enc_maddw.svg[MADDW encoding,width=800]
+
+*Uop-Class:* ALU
+
+*Compression:* L32 (len=32)
+
+*Uop-Class payload:* `{"alu_kind": "ALU_MULTI_CYCLE", "source": "group_rule", "uop_kind": "ALU"}`

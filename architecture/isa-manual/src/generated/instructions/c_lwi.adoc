@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_lwi]]
+==== C.LWI
+
+*Syntax:* c.lwi [srcL, simm], ->t
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_lwi.svg[C.LWI encoding,width=800]
+
+*Uop-Class:* LDA/BASE_IMM
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"addr_mode": "BASE_IMM", "agu_kind": "LDA", "note": "User confirmed all loads are AGU/LDA", "source": "group_rule", "uop_kind": "AGU"}`

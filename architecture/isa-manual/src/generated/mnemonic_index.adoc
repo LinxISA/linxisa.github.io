@@ -1,0 +1,720 @@
+// Generated file; do not edit by hand.
+
+[[mnemonic-index]]
+=== Mnemonic index
+
+This table lists unique mnemonics in the v0.3 catalog. Each mnemonic may have multiple encodable forms (different lengths, operand layouts, or suffix variants).
+
+[cols="2,3,1,1",options="header"]
+|===
+|Mnemonic |Groups |Lengths (bits) |Forms
+|`ACRC` |Execution Control |32 |1
+|`ACRE` |Execution Control |32 |1
+|`ADD` |Arithmetic Operation 64bit |32 |1
+|`ADDI` |Arithmetic Operation 64bit |32 |1
+|`ADDIW` |Arithmetic Operation 32bit |32 |1
+|`ADDTPC` |PC-Relative |32 |1
+|`ADDW` |Arithmetic Operation 32bit |32 |1
+|`AND` |Arithmetic Operation 64bit |32 |1
+|`ANDI` |Arithmetic Operation 64bit |32 |1
+|`ANDIW` |Arithmetic Operation 32bit |32 |1
+|`ANDW` |Arithmetic Operation 32bit |32 |1
+|`ASSERT` |Execution Control |32 |1
+|`B.ARG` |Block Argument |32 |6
+|`B.ATTR` |Block Attribute |32 |1
+|`B.DIM` |Block Argument |32 |3
+|`B.EQ` |Branch |32 |1
+|`B.GE` |Branch |32 |1
+|`B.GEU` |Branch |32 |1
+|`B.HINT` |Block Hint |32 |2
+|`B.IOD` |Block Input & Output |32 |1
+|`B.IOR` |Block Input & Output |32 |1
+|`B.IOT` |Block Input & Output |32 |2
+|`B.IOTI` |Block Input & Output |32 |2
+|`B.LT` |Branch |32 |1
+|`B.LTU` |Branch |32 |1
+|`B.NE` |Branch |32 |1
+|`B.NZ` |Branch |32 |1
+|`B.TEXT` |Block Offset |32 |1
+|`B.Z` |Branch |32 |1
+|`BC.IALL` |Cache Maintain |32 |1
+|`BC.IVA` |Cache Maintain |32 |1
+|`BCNT` |Bit Operation |32 |1
+|`BIC` |Bit Operation |32 |1
+|`BIS` |Bit Operation |32 |1
+|`BSE` |Execution Control |32 |1
+|`BSTART` |Block Split |32 |2
+|`BSTART CALL` |BSTART |32 |1
+|`BSTART.ACCCVT` |Block Split |32 |1
+|`BSTART.CUBE` |Block Split |32 |1
+|`BSTART.FIXP` |Block Split |32 |1
+|`BSTART.FP` |Block Split |32 |7
+|`BSTART.MPAR` |Block Split |32 |1
+|`BSTART.MSEQ` |Block Split |32 |1
+|`BSTART.STD` |Block Split |32 |7
+|`BSTART.SYS` |Block Split |32 |1
+|`BSTART.TEPL` |Block Split |32 |1
+|`BSTART.TLOAD` |Block Split |32 |1
+|`BSTART.TMA` |Block Split |32 |1
+|`BSTART.TMATMUL` |Block Split |32 |1
+|`BSTART.TMATMUL.ACC` |Block Split |32 |1
+|`BSTART.TMOV` |Block Split |32 |1
+|`BSTART.TSTORE` |Block Split |32 |1
+|`BSTART.VPAR` |Block Split |32 |1
+|`BSTART.VSEQ` |Block Split |32 |1
+|`BSTOP` |Block Split |32 |1
+|`BWE` |Execution Control |32 |1
+|`BWI` |Execution Control |32 |1
+|`BWT` |Execution Control |32 |1
+|`BXS` |Bit Operation |32 |1
+|`BXU` |Bit Operation |32 |1
+|`C.ADD` |Arithmetic Operation |16 |1
+|`C.ADDI` |Arithmetic |16 |1
+|`C.AND` |Arithmetic Operation |16 |1
+|`C.B.DIM` |Block Dimension |16 |1
+|`C.B.DIMI` |Block Dimension |16 |1
+|`C.BSTART` |Block Split |16 |2
+|`C.BSTART.FP` |C.BSTART |16 |1
+|`C.BSTART.MPAR` |C.BSTART |16 |1
+|`C.BSTART.MSEQ` |C.BSTART |16 |1
+|`C.BSTART.STD` |C.BSTART |16 |1
+|`C.BSTART.SYS` |C.BSTART |16 |1
+|`C.BSTART.VPAR` |C.BSTART |16 |1
+|`C.BSTART.VSEQ` |C.BSTART |16 |1
+|`C.BSTOP` |Block Split |16 |1
+|`C.CMP.EQI` |C.TINST |16 |1
+|`C.CMP.NEI` |C.TINST |16 |1
+|`C.EBREAK` |C.TINST |16 |1
+|`C.LDI` |Load Immediate Offset |16 |1
+|`C.LWI` |Load Immediate Offset |16 |1
+|`C.MOVI` |Move |16 |1
+|`C.MOVR` |Move |16 |1
+|`C.OR` |Arithmetic Operation |16 |1
+|`C.SDI` |Store Immediate Offset |16 |1
+|`C.SETC.EQ` |Set Commit Argument |16 |1
+|`C.SETC.NE` |Set Commit Argument |16 |1
+|`C.SETC.TGT` |C.UNARY |16 |1
+|`C.SETRET` |Move |16 |1
+|`C.SEXT.B` |C.UNARY |16 |1
+|`C.SEXT.H` |C.UNARY |16 |1
+|`C.SEXT.W` |C.UNARY |16 |1
+|`C.SLLI` |C.TINST |16 |1
+|`C.SRLI` |C.TINST |16 |1
+|`C.SSRGET` |C.TINST |16 |1
+|`C.SUB` |Arithmetic Operation |16 |1
+|`C.SWI` |Store Immediate Offset |16 |1
+|`C.ZEXT.B` |C.UNARY |16 |1
+|`C.ZEXT.H` |C.UNARY |16 |1
+|`C.ZEXT.W` |C.UNARY |16 |1
+|`CLZ` |Bit Operation |32 |1
+|`CMP.AND` |Compare Instruction |32 |1
+|`CMP.ANDI` |Compare Instruction |32 |1
+|`CMP.EQ` |Compare Instruction |32 |1
+|`CMP.EQI` |Compare Instruction |32 |1
+|`CMP.GE` |Compare Instruction |32 |1
+|`CMP.GEI` |Compare Instruction |32 |1
+|`CMP.GEU` |Compare Instruction |32 |1
+|`CMP.GEUI` |Compare Instruction |32 |1
+|`CMP.LT` |Compare Instruction |32 |1
+|`CMP.LTI` |Compare Instruction |32 |1
+|`CMP.LTU` |Compare Instruction |32 |1
+|`CMP.LTUI` |Compare Instruction |32 |1
+|`CMP.NE` |Compare Instruction |32 |1
+|`CMP.NEI` |Compare Instruction |32 |1
+|`CMP.OR` |Compare Instruction |32 |1
+|`CMP.ORI` |Compare Instruction |32 |1
+|`CSEL` |Compound Operation |32 |1
+|`CTZ` |Bit Operation |32 |1
+|`DC.CISW` |Cache Maintain |32 |1
+|`DC.CIVA` |Cache Maintain |32 |1
+|`DC.CSW` |Cache Maintain |32 |1
+|`DC.CVA` |Cache Maintain |32 |1
+|`DC.IALL` |Cache Maintain |32 |1
+|`DC.ISW` |Cache Maintain |32 |1
+|`DC.IVA` |Cache Maintain |32 |1
+|`DC.ZVA` |Cache Maintain |32 |1
+|`DIV` |Multi-Cycle ALU |32 |1
+|`DIVU` |Multi-Cycle ALU |32 |1
+|`DIVUW` |Multi-Cycle ALU |32 |1
+|`DIVW` |Multi-Cycle ALU |32 |1
+|`EBREAK` |Execution Control |32 |1
+|`ERCOV` |Block Split |32 |1
+|`ESAVE` |Block Split |32 |1
+|`FABS` |Floating-point Arithmetic |32 |1
+|`FADD` |Floating-point Arithmetic |32 |1
+|`FCVT` |Format Convert |32 |1
+|`FCVTA` |Format Convert |32 |1
+|`FCVTM` |Format Convert |32 |1
+|`FCVTN` |Format Convert |32 |1
+|`FCVTP` |Format Convert |32 |1
+|`FCVTZ` |Format Convert |32 |1
+|`FDIV` |Floating-point Arithmetic |32 |1
+|`FENCE.D` |Execution Control |32 |1
+|`FENCE.I` |Execution Control |32 |1
+|`FENTRY` |Block Split |32 |1
+|`FEQ` |Floating-point Compare |32 |1
+|`FEQS` |Floating-point Compare |32 |1
+|`FEXIT` |Block Split |32 |1
+|`FEXP` |Floating-point Arithmetic |32 |1
+|`FGE` |Floating-point Compare |32 |1
+|`FGES` |Floating-point Compare |32 |1
+|`FLT` |Floating-point Compare |32 |1
+|`FLTS` |Floating-point Compare |32 |1
+|`FMADD` |Floating-point Arithmetic |32 |1
+|`FMAX` |Max-Min |32 |1
+|`FMIN` |Max-Min |32 |1
+|`FMSUB` |Floating-point Arithmetic |32 |1
+|`FMUL` |Floating-point Arithmetic |32 |1
+|`FNE` |Floating-point Compare |32 |1
+|`FNES` |Floating-point Compare |32 |1
+|`FNMADD` |Floating-point Arithmetic |32 |1
+|`FNMSUB` |Floating-point Arithmetic |32 |1
+|`FRECIP` |Floating-point Arithmetic |32 |1
+|`FRET.RA` |Block Split |32 |1
+|`FRET.STK` |Block Split |32 |1
+|`FSQRT` |Floating-point Arithmetic |32 |1
+|`FSUB` |Floating-point Arithmetic |32 |1
+|`HL.ADDI` |Arithmetic Operation 64bit |48 |1
+|`HL.ADDIW` |Arithmetic Operation 32bit |48 |1
+|`HL.ADDTPC` |PC-Relative |48 |1
+|`HL.ANDI` |Arithmetic Operation 64bit |48 |1
+|`HL.ANDIW` |Arithmetic Operation 32bit |48 |1
+|`HL.BFI` |RESERVE |48 |1
+|`HL.BSTART CALL` |BSTART |48 |1
+|`HL.BSTART.FP` |BSTART |48 |4
+|`HL.BSTART.STD` |BSTART |48 |4
+|`HL.BSTART.SYS` |BSTART |48 |1
+|`HL.CASB` |Atomic |48 |1
+|`HL.CASD` |Atomic |48 |1
+|`HL.CASH` |Atomic |48 |1
+|`HL.CASW` |Atomic |48 |1
+|`HL.CCAT` |Concat |48 |1
+|`HL.CCATW` |Concat |48 |1
+|`HL.CMP.ANDI` |Compare Instruction |48 |1
+|`HL.CMP.EQI` |Compare Instruction |48 |1
+|`HL.CMP.GEI` |Compare Instruction |48 |1
+|`HL.CMP.GEUI` |Compare Instruction |48 |1
+|`HL.CMP.LTI` |Compare Instruction |48 |1
+|`HL.CMP.LTUI` |Compare Instruction |48 |1
+|`HL.CMP.NEI` |Compare Instruction |48 |1
+|`HL.CMP.ORI` |Compare Instruction |48 |1
+|`HL.DIV` |Multi-Cycle ALU |48 |1
+|`HL.DIVU` |Multi-Cycle ALU |48 |1
+|`HL.DIVUW` |Multi-Cycle ALU |48 |1
+|`HL.DIVW` |Multi-Cycle ALU |48 |1
+|`HL.LB.PCR` |Load PC-Relative |48 |1
+|`HL.LB.PO` |Load Post-Index |48 |1
+|`HL.LB.PR` |Load Pre-Index |48 |1
+|`HL.LBI` |Load Long Offset |48 |1
+|`HL.LBI.PO` |Load Post-Index |48 |1
+|`HL.LBI.PR` |Load Pre-Index |48 |1
+|`HL.LBIP` |Load Pair |48 |1
+|`HL.LBP` |Load Pair |48 |1
+|`HL.LBU.PCR` |Load PC-Relative |48 |1
+|`HL.LBU.PO` |Load Post-Index |48 |1
+|`HL.LBU.PR` |Load Pre-Index |48 |1
+|`HL.LBUI` |Load Long Offset |48 |1
+|`HL.LBUI.PO` |Load Post-Index |48 |1
+|`HL.LBUI.PR` |Load Pre-Index |48 |1
+|`HL.LBUIP` |Load Pair |48 |1
+|`HL.LBUP` |Load Pair |48 |1
+|`HL.LD.PCR` |Load PC-Relative |48 |1
+|`HL.LD.PO` |Load Post-Index |48 |1
+|`HL.LD.PR` |Load Pre-Index |48 |1
+|`HL.LDI` |Load Long Offset |48 |1
+|`HL.LDI.PO` |Load Post-Index |48 |1
+|`HL.LDI.PR` |Load Pre-Index |48 |1
+|`HL.LDI.U` |Load Long Offset |48 |1
+|`HL.LDI.UPO` |Load Post-Index |48 |1
+|`HL.LDI.UPR` |Load Pre-Index |48 |1
+|`HL.LDIP` |Load Pair |48 |1
+|`HL.LDIP.U` |Load Pair |48 |1
+|`HL.LDP` |Load Pair |48 |1
+|`HL.LH.PCR` |Load PC-Relative |48 |1
+|`HL.LH.PO` |Load Post-Index |48 |1
+|`HL.LH.PR` |Load Pre-Index |48 |1
+|`HL.LHI` |Load Long Offset |48 |1
+|`HL.LHI.PO` |Load Post-Index |48 |1
+|`HL.LHI.PR` |Load Pre-Index |48 |1
+|`HL.LHI.U` |Load Long Offset |48 |1
+|`HL.LHI.UPO` |Load Post-Index |48 |1
+|`HL.LHI.UPR` |Load Pre-Index |48 |1
+|`HL.LHIP` |Load Pair |48 |1
+|`HL.LHIP.U` |Load Pair |48 |1
+|`HL.LHP` |Load Pair |48 |1
+|`HL.LHU.PCR` |Load PC-Relative |48 |1
+|`HL.LHU.PO` |Load Post-Index |48 |1
+|`HL.LHU.PR` |Load Pre-Index |48 |1
+|`HL.LHUI` |Load Long Offset |48 |1
+|`HL.LHUI.PO` |Load Post-Index |48 |1
+|`HL.LHUI.PR` |Load Pre-Index |48 |1
+|`HL.LHUI.U` |Load Long Offset |48 |1
+|`HL.LHUI.UPO` |Load Post-Index |48 |1
+|`HL.LHUI.UPR` |Load Pre-Index |48 |1
+|`HL.LHUIP` |Load Pair |48 |1
+|`HL.LHUIP.U` |Load Pair |48 |1
+|`HL.LHUP` |Load Pair |48 |1
+|`HL.LIS` |Long Immediate |48 |1
+|`HL.LIU` |Long Immediate |48 |1
+|`HL.LUI` |Immediate |48 |1
+|`HL.LW.PCR` |Load PC-Relative |48 |1
+|`HL.LW.PO` |Load Post-Index |48 |1
+|`HL.LW.PR` |Load Pre-Index |48 |1
+|`HL.LWI` |Load Long Offset |48 |1
+|`HL.LWI.PO` |Load Post-Index |48 |1
+|`HL.LWI.PR` |Load Pre-Index |48 |1
+|`HL.LWI.U` |Load Long Offset |48 |1
+|`HL.LWI.UPO` |Load Post-Index |48 |1
+|`HL.LWI.UPR` |Load Pre-Index |48 |1
+|`HL.LWIP` |Load Pair |48 |1
+|`HL.LWIP.U` |Load Pair |48 |1
+|`HL.LWP` |Load Pair |48 |1
+|`HL.LWU.PCR` |Load PC-Relative |48 |1
+|`HL.LWU.PO` |Load Post-Index |48 |1
+|`HL.LWU.PR` |Load Pre-Index |48 |1
+|`HL.LWUI` |Load Long Offset |48 |1
+|`HL.LWUI.PO` |Load Post-Index |48 |1
+|`HL.LWUI.PR` |Load Pre-Index |48 |1
+|`HL.LWUI.U` |Load Long Offset |48 |1
+|`HL.LWUI.UPO` |Load Post-Index |48 |1
+|`HL.LWUI.UPR` |Load Pre-Index |48 |1
+|`HL.LWUIP` |Load Pair |48 |1
+|`HL.LWUIP.U` |Load Pair |48 |1
+|`HL.LWUP` |Load Pair |48 |1
+|`HL.MADD` |Multi-Cycle ALU |48 |1
+|`HL.MADDW` |Multi-Cycle ALU |48 |1
+|`HL.MIADD` |RESERVE |48 |1
+|`HL.MISUB` |RESERVE |48 |1
+|`HL.MUL` |Multi-Cycle ALU |48 |1
+|`HL.MULU` |Multi-Cycle ALU |48 |1
+|`HL.ORI` |Arithmetic Operation 64bit |48 |1
+|`HL.ORIW` |Arithmetic Operation 32bit |48 |1
+|`HL.PRF` |Prefetch |48 |1
+|`HL.PRF.A` |Prefetch |48 |1
+|`HL.PRFI.U` |Prefetch |48 |1
+|`HL.PRFI.UA` |Prefetch |48 |1
+|`HL.QMT` |General |48 |1
+|`HL.QPOP` |General |48 |1
+|`HL.QPUSH` |General |48 |1
+|`HL.REM` |Multi-Cycle ALU |48 |1
+|`HL.REMU` |Multi-Cycle ALU |48 |1
+|`HL.REMUW` |Multi-Cycle ALU |48 |1
+|`HL.REMW` |Multi-Cycle ALU |48 |1
+|`HL.SB.PCR` |Store PC-Relative |48 |1
+|`HL.SB.PO` |Store Post-Index |48 |1
+|`HL.SB.PR` |Store Pre-Index |48 |1
+|`HL.SBI` |Store Long Offset |48 |1
+|`HL.SBI.PO` |Store Post-Index |48 |1
+|`HL.SBI.PR` |Store Pre-Index |48 |1
+|`HL.SBIP` |Store Pair |48 |1
+|`HL.SBP` |Store Pair |48 |1
+|`HL.SD.PCR` |Store PC-Relative |48 |1
+|`HL.SD.PO` |Store Post-Index |48 |1
+|`HL.SD.PR` |Store Pre-Index |48 |1
+|`HL.SD.UPO` |Store Post-Index |48 |1
+|`HL.SD.UPR` |Store Pre-Index |48 |1
+|`HL.SDI` |Store Long Offset |48 |1
+|`HL.SDI.PO` |Store Post-Index |48 |1
+|`HL.SDI.PR` |Store Pre-Index |48 |1
+|`HL.SDI.U` |Store Long Offset |48 |1
+|`HL.SDI.UPO` |Store Post-Index |48 |1
+|`HL.SDI.UPR` |Store Pre-Index |48 |1
+|`HL.SDIP` |Store Pair |48 |1
+|`HL.SDIP.U` |Store Pair |48 |1
+|`HL.SDP` |Store Pair |48 |1
+|`HL.SDP.U` |Store Pair |48 |1
+|`HL.SETC.ANDI` |Set Commit Argument |48 |1
+|`HL.SETC.EQI` |Set Commit Argument |48 |1
+|`HL.SETC.GEI` |Set Commit Argument |48 |1
+|`HL.SETC.GEUI` |Set Commit Argument |48 |1
+|`HL.SETC.LTI` |Set Commit Argument |48 |1
+|`HL.SETC.LTUI` |Set Commit Argument |48 |1
+|`HL.SETC.NEI` |Set Commit Argument |48 |1
+|`HL.SETC.ORI` |Set Commit Argument |48 |1
+|`HL.SETRET` |PC-Relative |48 |1
+|`HL.SH.PCR` |Store PC-Relative |48 |1
+|`HL.SH.PO` |Store Post-Index |48 |1
+|`HL.SH.PR` |Store Pre-Index |48 |1
+|`HL.SH.UPO` |Store Post-Index |48 |1
+|`HL.SH.UPR` |Store Pre-Index |48 |1
+|`HL.SHI` |Store Long Offset |48 |1
+|`HL.SHI.PO` |Store Post-Index |48 |1
+|`HL.SHI.PR` |Store Pre-Index |48 |1
+|`HL.SHI.U` |Store Long Offset |48 |1
+|`HL.SHI.UPO` |Store Post-Index |48 |1
+|`HL.SHI.UPR` |Store Pre-Index |48 |1
+|`HL.SHIP` |Store Pair |48 |1
+|`HL.SHIP.U` |Store Pair |48 |1
+|`HL.SHP` |Store Pair |48 |1
+|`HL.SHP.U` |Store Pair |48 |1
+|`HL.SSRGET` |SSR Access |48 |1
+|`HL.SSRSET` |SSR Access |48 |1
+|`HL.SUBI` |Arithmetic Operation 64bit |48 |1
+|`HL.SUBIW` |Arithmetic Operation 32bit |48 |1
+|`HL.SW.PCR` |Store PC-Relative |48 |1
+|`HL.SW.PO` |Store Post-Index |48 |1
+|`HL.SW.PR` |Store Pre-Index |48 |1
+|`HL.SW.UPO` |Store Post-Index |48 |1
+|`HL.SW.UPR` |Store Pre-Index |48 |1
+|`HL.SWI` |Store Long Offset |48 |1
+|`HL.SWI.PO` |Store Post-Index |48 |1
+|`HL.SWI.PR` |Store Pre-Index |48 |1
+|`HL.SWI.U` |Store Long Offset |48 |1
+|`HL.SWI.UPO` |Store Post-Index |48 |1
+|`HL.SWI.UPR` |Store Pre-Index |48 |1
+|`HL.SWIP` |Store Pair |48 |1
+|`HL.SWIP.U` |Store Pair |48 |1
+|`HL.SWP` |Store Pair |48 |1
+|`HL.SWP.U` |Store Pair |48 |1
+|`HL.XORI` |Arithmetic Operation 64bit |48 |1
+|`HL.XORIW` |Arithmetic Operation 32bit |48 |1
+|`IC.IALL` |Cache Maintain |32 |1
+|`IC.IVA` |Cache Maintain |32 |1
+|`J` |Branch |32 |1
+|`JR` |Branch |32 |1
+|`LB` |Load Register Offset |32 |1
+|`LB.PCR` |Load Symbol |32 |1
+|`LBI` |Load Immediate Offset |32 |1
+|`LBU` |Load Register Offset |32 |1
+|`LBU.PCR` |Load Symbol |32 |1
+|`LBUI` |Load Immediate Offset |32 |1
+|`LD` |Load Register Offset |32 |1
+|`LD.ADD` |Atomic Operation |32 |1
+|`LD.AND` |Atomic Operation |32 |1
+|`LD.OR` |Atomic Operation |32 |1
+|`LD.PCR` |Load Symbol |32 |1
+|`LD.SMAX` |Atomic Operation |32 |1
+|`LD.SMIN` |Atomic Operation |32 |1
+|`LD.UMAX` |Atomic Operation |32 |1
+|`LD.UMIN` |Atomic Operation |32 |1
+|`LD.XOR` |Atomic Operation |32 |1
+|`LDI` |Load Immediate Offset |32 |1
+|`LDI.U` |Load UnScaled |32 |1
+|`LH` |Load Register Offset |32 |1
+|`LH.PCR` |Load Symbol |32 |1
+|`LHI` |Load Immediate Offset |32 |1
+|`LHI.U` |Load UnScaled |32 |1
+|`LHU` |Load Register Offset |32 |1
+|`LHU.PCR` |Load Symbol |32 |1
+|`LHUI` |Load Immediate Offset |32 |1
+|`LHUI.U` |Load UnScaled |32 |1
+|`LR.B` |Atomic Operation |32 |1
+|`LR.D` |Atomic Operation |32 |1
+|`LR.H` |Atomic Operation |32 |1
+|`LR.W` |Atomic Operation |32 |1
+|`LSRGET` |SSR Access |32 |1
+|`LUI` |Immediate |32 |1
+|`LW` |Load Register Offset |32 |1
+|`LW.ADD` |Atomic Operation |32 |1
+|`LW.AND` |Atomic Operation |32 |1
+|`LW.OR` |Atomic Operation |32 |1
+|`LW.PCR` |Load Symbol |32 |1
+|`LW.SMAX` |Atomic Operation |32 |1
+|`LW.SMIN` |Atomic Operation |32 |1
+|`LW.UMAX` |Atomic Operation |32 |1
+|`LW.UMIN` |Atomic Operation |32 |1
+|`LW.XOR` |Atomic Operation |32 |1
+|`LWI` |Load Immediate Offset |32 |1
+|`LWI.U` |Load UnScaled |32 |1
+|`LWU` |Load Register Offset |32 |1
+|`LWU.PCR` |Load Symbol |32 |1
+|`LWUI` |Load Immediate Offset |32 |1
+|`LWUI.U` |Load UnScaled |32 |1
+|`MADD` |Multi-Cycle ALU |32 |1
+|`MADDW` |Multi-Cycle ALU |32 |1
+|`MAX` |Max-Min |32 |1
+|`MAXU` |Max-Min |32 |1
+|`MCOPY` |Block Split |32 |1
+|`MIN` |Max-Min |32 |1
+|`MINU` |Max-Min |32 |1
+|`MSET` |Block Split |32 |1
+|`MUL` |Multi-Cycle ALU |32 |1
+|`MULU` |Multi-Cycle ALU |32 |1
+|`MULUW` |Multi-Cycle ALU |32 |1
+|`MULW` |Multi-Cycle ALU |32 |1
+|`OR` |Arithmetic Operation 64bit |32 |1
+|`ORI` |Arithmetic Operation 64bit |32 |1
+|`ORIW` |Arithmetic Operation 32bit |32 |1
+|`ORW` |Arithmetic Operation 32bit |32 |1
+|`PRF` |Load Register Offset |32 |1
+|`PRFI.U` |Load UnScaled |32 |1
+|`REM` |Multi-Cycle ALU |32 |1
+|`REMU` |Multi-Cycle ALU |32 |1
+|`REMUW` |Multi-Cycle ALU |32 |1
+|`REMW` |Multi-Cycle ALU |32 |1
+|`REV` |Bit Operation |32 |1
+|`SB` |Store Register Offset |32 |1
+|`SB.PCR` |Store Symbol |32 |1
+|`SBI` |Store Immediate Offset |32 |1
+|`SC.B` |Atomic Operation |32 |1
+|`SC.D` |Atomic Operation |32 |1
+|`SC.H` |Atomic Operation |32 |1
+|`SC.W` |Atomic Operation |32 |1
+|`SCVTF` |Format Convert |32 |1
+|`SD` |Store Register Offset |32 |1
+|`SD.ADD` |Atomic Operation |32 |1
+|`SD.AND` |Atomic Operation |32 |1
+|`SD.OR` |Atomic Operation |32 |1
+|`SD.PCR` |Store Symbol |32 |1
+|`SD.SMAX` |Atomic Operation |32 |1
+|`SD.SMIN` |Atomic Operation |32 |1
+|`SD.U` |Store Register Offset |32 |1
+|`SD.UMAX` |Atomic Operation |32 |1
+|`SD.UMIN` |Atomic Operation |32 |1
+|`SD.XOR` |Atomic Operation |32 |1
+|`SDI` |Store Immediate Offset |32 |1
+|`SDI.U` |Store Immediate Offset |32 |1
+|`SETC.AND` |Set Commit Argument |32 |1
+|`SETC.ANDI` |Set Commit Argument |32 |1
+|`SETC.EQ` |Set Commit Argument |32 |1
+|`SETC.EQI` |Set Commit Argument |32 |1
+|`SETC.GE` |Set Commit Argument |32 |1
+|`SETC.GEI` |Set Commit Argument |32 |1
+|`SETC.GEU` |Set Commit Argument |32 |1
+|`SETC.GEUI` |Set Commit Argument |32 |1
+|`SETC.LT` |Set Commit Argument |32 |1
+|`SETC.LTI` |Set Commit Argument |32 |1
+|`SETC.LTU` |Set Commit Argument |32 |1
+|`SETC.LTUI` |Set Commit Argument |32 |1
+|`SETC.NE` |Set Commit Argument |32 |1
+|`SETC.NEI` |Set Commit Argument |32 |1
+|`SETC.OR` |Set Commit Argument |32 |1
+|`SETC.ORI` |Set Commit Argument |32 |1
+|`SETC.TGT` |SSR Access |32 |1
+|`SETRET` |PC-Relative |32 |1
+|`SH` |Store Register Offset |32 |1
+|`SH.PCR` |Store Symbol |32 |1
+|`SH.U` |Store Register Offset |32 |1
+|`SHI` |Store Immediate Offset |32 |1
+|`SHI.U` |Store Immediate Offset |32 |1
+|`SLL` |Arithmetic Operation 64bit |32 |1
+|`SLLI` |Arithmetic Operation 64bit |32 |1
+|`SLLIW` |Arithmetic Operation 32bit |32 |1
+|`SLLW` |Arithmetic Operation 32bit |32 |1
+|`SRA` |Arithmetic Operation 64bit |32 |1
+|`SRAI` |Arithmetic Operation 64bit |32 |1
+|`SRAIW` |Arithmetic Operation 32bit |32 |1
+|`SRAW` |Arithmetic Operation 32bit |32 |1
+|`SRL` |Arithmetic Operation 64bit |32 |1
+|`SRLI` |Arithmetic Operation 64bit |32 |1
+|`SRLIW` |Arithmetic Operation 32bit |32 |1
+|`SRLW` |Arithmetic Operation 32bit |32 |1
+|`SSRGET` |SSR Access |32 |1
+|`SSRSET` |SSR Access |32 |1
+|`SSRSWAP` |SSR Access |32 |1
+|`SUB` |Arithmetic Operation 64bit |32 |1
+|`SUBI` |Arithmetic Operation 64bit |32 |1
+|`SUBIW` |Arithmetic Operation 32bit |32 |1
+|`SUBW` |Arithmetic Operation 32bit |32 |1
+|`SW` |Store Register Offset |32 |1
+|`SW.ADD` |Atomic Operation |32 |1
+|`SW.AND` |Atomic Operation |32 |1
+|`SW.OR` |Atomic Operation |32 |1
+|`SW.PCR` |Store Symbol |32 |1
+|`SW.SMAX` |Atomic Operation |32 |1
+|`SW.SMIN` |Atomic Operation |32 |1
+|`SW.U` |Store Register Offset |32 |1
+|`SW.UMAX` |Atomic Operation |32 |1
+|`SW.UMIN` |Atomic Operation |32 |1
+|`SW.XOR` |Atomic Operation |32 |1
+|`SWAPB` |Atomic Operation |32 |1
+|`SWAPD` |Atomic Operation |32 |1
+|`SWAPH` |Atomic Operation |32 |1
+|`SWAPW` |Atomic Operation |32 |1
+|`SWI` |Store Immediate Offset |32 |1
+|`SWI.U` |Store Immediate Offset |32 |1
+|`TLB.IA` |Cache Maintain |32 |1
+|`TLB.IALL` |Cache Maintain |32 |1
+|`TLB.IAV` |Cache Maintain |32 |1
+|`TLB.IV` |Cache Maintain |32 |1
+|`UCVTF` |Format Convert |32 |1
+|`V.ADD` |Arithmetic Operation |64 |1
+|`V.ADDI` |Arithmetic Operation |64 |1
+|`V.AND` |Arithmetic Operation |64 |1
+|`V.ANDI` |Arithmetic Operation |64 |1
+|`V.BCNT` |Bit Manipulation |64 |1
+|`V.BIC` |Bit Manipulation |64 |1
+|`V.BIS` |Bit Manipulation |64 |1
+|`V.BXS` |Bit Manipulation |64 |1
+|`V.BXU` |Bit Manipulation |64 |1
+|`V.CLZ` |Bit Manipulation |64 |1
+|`V.CMP.AND` |Compare Instruction |64 |1
+|`V.CMP.ANDI` |Compare Instruction |64 |1
+|`V.CMP.EQ` |Compare Instruction |64 |1
+|`V.CMP.EQI` |Compare Instruction |64 |1
+|`V.CMP.GE` |Compare Instruction |64 |1
+|`V.CMP.GEI` |Compare Instruction |64 |1
+|`V.CMP.GEU` |Compare Instruction |64 |1
+|`V.CMP.GEUI` |Compare Instruction |64 |1
+|`V.CMP.LT` |Compare Instruction |64 |1
+|`V.CMP.LTI` |Compare Instruction |64 |1
+|`V.CMP.LTU` |Compare Instruction |64 |1
+|`V.CMP.LTUI` |Compare Instruction |64 |1
+|`V.CMP.NE` |Compare Instruction |64 |1
+|`V.CMP.NEI` |Compare Instruction |64 |1
+|`V.CMP.OR` |Compare Instruction |64 |1
+|`V.CMP.ORI` |Compare Instruction |64 |1
+|`V.CSEL` |Three Source Integer |64 |1
+|`V.CTZ` |Bit Manipulation |64 |1
+|`V.DIV` |Division |64 |1
+|`V.FABS` |Floating Point Arithmetic |64 |1
+|`V.FADD` |Three-Source Floating Point |64 |1
+|`V.FCLASS` |Floating Point Arithmetic |64 |1
+|`V.FCVT` |Format Convert |64 |1
+|`V.FCVTI` |Format Convert |64 |1
+|`V.FDIV` |Three-Source Floating Point |64 |1
+|`V.FEQ` |Two-Source Floating Point |64 |1
+|`V.FEQS` |Two-Source Floating Point |64 |1
+|`V.FEXP` |Floating Point Arithmetic |64 |1
+|`V.FGE` |Two-Source Floating Point |64 |1
+|`V.FGES` |Two-Source Floating Point |64 |1
+|`V.FLT` |Two-Source Floating Point |64 |1
+|`V.FLTS` |Two-Source Floating Point |64 |1
+|`V.FMADD` |Three-Source Floating Point |64 |1
+|`V.FMAX` |Two-Source Floating Point |64 |1
+|`V.FMIN` |Two-Source Floating Point |64 |1
+|`V.FMSUB` |Three-Source Floating Point |64 |1
+|`V.FMUL` |Three-Source Floating Point |64 |1
+|`V.FNE` |Two-Source Floating Point |64 |1
+|`V.FNES` |Two-Source Floating Point |64 |1
+|`V.FNMADD` |Three-Source Floating Point |64 |1
+|`V.FNMSUB` |Three-Source Floating Point |64 |1
+|`V.FRECIP` |Floating Point Arithmetic |64 |1
+|`V.FSQRT` |Floating Point Arithmetic |64 |1
+|`V.FSUB` |Three-Source Floating Point |64 |1
+|`V.ICVT` |Format Convert |64 |1
+|`V.ICVTF` |Format Convert |64 |1
+|`V.LB` |Load Register Offset |64 |1
+|`V.LB.BRG` |Load Register Offset |64 |1
+|`V.LBI` |Load Immediate Offset |64 |1
+|`V.LBI.BRG` |Load Immediate Offset |64 |1
+|`V.LBU` |Load Register Offset |64 |1
+|`V.LBU.BRG` |Load Register Offset |64 |1
+|`V.LBUI` |Load Immediate Offset |64 |1
+|`V.LBUI.BRG` |Load Immediate Offset |64 |1
+|`V.LD` |Load Register Offset |64 |1
+|`V.LD.ADD` |Atomic Operation |64 |1
+|`V.LD.AND` |Atomic Operation |64 |1
+|`V.LD.BRG` |Load Register Offset |64 |1
+|`V.LD.MAX` |Atomic Operation |64 |1
+|`V.LD.MIN` |Atomic Operation |64 |1
+|`V.LD.OR` |Atomic Operation |64 |1
+|`V.LD.XOR` |Atomic Operation |64 |1
+|`V.LDI` |Load Immediate Offset |64 |1
+|`V.LDI.BRG` |Load Immediate Offset |64 |1
+|`V.LDI.U` |Load UnScaled |64 |1
+|`V.LDI.U.BRG` |Load UnScaled |64 |1
+|`V.LH` |Load Register Offset |64 |1
+|`V.LH.BRG` |Load Register Offset |64 |1
+|`V.LHI` |Load Immediate Offset |64 |1
+|`V.LHI.BRG` |Load Immediate Offset |64 |1
+|`V.LHI.U` |Load UnScaled |64 |1
+|`V.LHI.U.BRG` |Load UnScaled |64 |1
+|`V.LHU` |Load Register Offset |64 |1
+|`V.LHU.BRG` |Load Register Offset |64 |1
+|`V.LHUI` |Load Immediate Offset |64 |1
+|`V.LHUI.BRG` |Load Immediate Offset |64 |1
+|`V.LHUI.U` |Load UnScaled |64 |1
+|`V.LHUI.U.BRG` |Load UnScaled |64 |1
+|`V.LW` |Load Register Offset |64 |1
+|`V.LW.ADD` |Atomic Operation |64 |1
+|`V.LW.AND` |Atomic Operation |64 |1
+|`V.LW.BRG` |Load Register Offset |64 |1
+|`V.LW.MAX` |Atomic Operation |64 |1
+|`V.LW.MIN` |Atomic Operation |64 |1
+|`V.LW.OR` |Atomic Operation |64 |1
+|`V.LW.XOR` |Atomic Operation |64 |1
+|`V.LWI` |Load Immediate Offset |64 |1
+|`V.LWI.BRG` |Load Immediate Offset |64 |1
+|`V.LWI.U` |Load UnScaled |64 |1
+|`V.LWI.U.BRG` |Load UnScaled |64 |1
+|`V.LWU` |Load Register Offset |64 |1
+|`V.LWU.BRG` |Load Register Offset |64 |1
+|`V.LWUI` |Load Immediate Offset |64 |1
+|`V.LWUI.BRG` |Load Immediate Offset |64 |1
+|`V.LWUI.U` |Load UnScaled |64 |1
+|`V.LWUI.U.BRG` |Load UnScaled |64 |1
+|`V.MADD` |Multi-Cycle ALU |64 |1
+|`V.MAX` |Two-Source Floating Point |64 |1
+|`V.MIN` |Two-Source Floating Point |64 |1
+|`V.MUL` |Multi-Cycle ALU |64 |1
+|`V.OR` |Arithmetic Operation |64 |1
+|`V.ORI` |Arithmetic Operation |64 |1
+|`V.PSEL` |Three Source Integer |64 |1
+|`V.QPOP` |General Manager |64 |1
+|`V.QPUSH` |General Manager |64 |1
+|`V.RDADD` |Reduce Operation with Register |64 |1
+|`V.RDAND` |Reduce Operation with Register |64 |1
+|`V.RDFADD` |Reduce Operation with Register |64 |1
+|`V.RDFMAX` |Reduce Operation with Register |64 |1
+|`V.RDFMIN` |Reduce Operation with Register |64 |1
+|`V.RDMAX` |Reduce Operation with Register |64 |1
+|`V.RDMIN` |Reduce Operation with Register |64 |1
+|`V.RDOR` |Reduce Operation with Register |64 |1
+|`V.RDXOR` |Reduce Operation with Register |64 |1
+|`V.REM` |Division |64 |1
+|`V.REV` |Bit Manipulation |64 |1
+|`V.SB` |Store Register Offset |64 |1
+|`V.SB.BRG` |Store Register Offset |64 |1
+|`V.SBI` |Store Offset |64 |1
+|`V.SBI.BRG` |Store Offset |64 |1
+|`V.SD` |Store Register Offset |64 |1
+|`V.SD.ADD` |Atomic Operation |64 |1
+|`V.SD.AND` |Atomic Operation |64 |1
+|`V.SD.BRG` |Store Register Offset |64 |1
+|`V.SD.MAX` |Atomic Operation |64 |1
+|`V.SD.MIN` |Atomic Operation |64 |1
+|`V.SD.OR` |Atomic Operation |64 |1
+|`V.SD.U` |Store Register Offset |64 |1
+|`V.SD.U.BRG` |Store Register Offset |64 |1
+|`V.SD.XOR` |Atomic Operation |64 |1
+|`V.SDI` |Store Offset |64 |1
+|`V.SDI.BRG` |Store Offset |64 |1
+|`V.SDI.U` |Store Offset |64 |1
+|`V.SDI.U.BRG` |Store Offset |64 |1
+|`V.SH` |Store Register Offset |64 |1
+|`V.SH.BRG` |Store Register Offset |64 |1
+|`V.SH.U` |Store Register Offset |64 |1
+|`V.SH.U.BRG` |Store Register Offset |64 |1
+|`V.SHFL.BFLY` |Shuffle |64 |1
+|`V.SHFL.DOWN` |Shuffle |64 |1
+|`V.SHFL.IDX` |Shuffle |64 |1
+|`V.SHFL.UP` |Shuffle |64 |1
+|`V.SHFLI.BFLY` |Shuffle |64 |1
+|`V.SHFLI.DOWN` |Shuffle |64 |1
+|`V.SHFLI.IDX` |Shuffle |64 |1
+|`V.SHFLI.UP` |Shuffle |64 |1
+|`V.SHI` |Store Offset |64 |1
+|`V.SHI.BRG` |Store Offset |64 |1
+|`V.SHI.U` |Store Offset |64 |1
+|`V.SHI.U.BRG` |Store Offset |64 |1
+|`V.SLL` |Arithmetic Operation |64 |1
+|`V.SLLI` |Arithmetic Operation |64 |1
+|`V.SRA` |Arithmetic Operation |64 |1
+|`V.SRAI` |Arithmetic Operation |64 |1
+|`V.SRL` |Arithmetic Operation |64 |1
+|`V.SRLI` |Arithmetic Operation |64 |1
+|`V.SUB` |Arithmetic Operation |64 |1
+|`V.SUBI` |Arithmetic Operation |64 |1
+|`V.SW` |Store Register Offset |64 |1
+|`V.SW.ADD` |Atomic Operation |64 |1
+|`V.SW.AND` |Atomic Operation |64 |1
+|`V.SW.BRG` |Store Register Offset |64 |1
+|`V.SW.MAX` |Atomic Operation |64 |1
+|`V.SW.MIN` |Atomic Operation |64 |1
+|`V.SW.OR` |Atomic Operation |64 |1
+|`V.SW.U` |Store Register Offset |64 |1
+|`V.SW.U.BRG` |Store Register Offset |64 |1
+|`V.SW.XOR` |Atomic Operation |64 |1
+|`V.SWI` |Store Offset |64 |1
+|`V.SWI.BRG` |Store Offset |64 |1
+|`V.SWI.U` |Store Offset |64 |1
+|`V.SWI.U.BRG` |Store Offset |64 |1
+|`V.XOR` |Arithmetic Operation |64 |1
+|`V.XORI` |Arithmetic Operation |64 |1
+|`XB` |Block Split |32 |1
+|`XOR` |Arithmetic Operation 64bit |32 |1
+|`XORI` |Arithmetic Operation 64bit |32 |1
+|`XORIW` |Arithmetic Operation 32bit |32 |1
+|`XORW` |Arithmetic Operation 32bit |32 |1
+|===

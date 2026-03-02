@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_hl_lwip_u]]
+==== HL.LWIP.U
+
+*Syntax:* hl.lwip.u [SrcL, simm], ->Dst0, Dst1
+
+*Description:* Long (48-bit) instruction encoding.
+
+*Encoding:*
+
+image::../generated/encodings/enc_hl_lwip_u.svg[HL.LWIP.U encoding,width=800]
+
+*Uop-Class:* LDA/PAIR
+
+*Compression:* HL48 (len=48)
+
+*Uop-Class payload:* `{"addr_mode": "PAIR", "agu_kind": "LDA", "note": "User confirmed all loads are AGU/LDA", "source": "group_rule", "uop_kind": "AGU"}`

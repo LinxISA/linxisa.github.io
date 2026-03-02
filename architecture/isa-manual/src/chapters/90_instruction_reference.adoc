@@ -1,0 +1,10 @@
+[[insnref]]
+== Instruction reference (catalog)
+
+This chapter is generated from `isa/v0.3/linxisa-v0.3.json` and is intended to be a complete listing of *encodable
+instruction forms* in the v0.2 catalog.
+
+include::../generated/instruction_group_summary.adoc[]
+include::../generated/mnemonic_index.adoc[]
+include::../generated/instruction_reference.adoc[]
+include::../generated/instruction_details.adoc[]

@@ -1,0 +1,200 @@
+[[encoding]]
+== Instruction encoding and formats
+
+[[encoding-bitnumbering]]
+=== Bit numbering
+
+Within an instruction part, bit 0 is the least-significant bit (LSB) of that part.
+
+[[encoding-lengths]]
+=== Instruction lengths and multi-part forms
+
+The catalog contains 16/32/48/64-bit instruction forms. Some 64-bit forms are represented as two 32-bit parts.
+
+[[encoding-alignment]]
+=== Alignment and halfword addressing
+
+Linx instruction addresses are expressed in bytes, but the ISA is fundamentally *halfword-oriented*:
+
+* 16-bit instructions are a first-class encoding.
+* Many PC-relative offsets are specified in halfwords and scaled by `<< 1` (see <<encoding-pc-relative>>).
+
+Code generation and tooling should assume at least 16-bit alignment for instruction fetch.
+
+[[encoding-prefix-suffix]]
+=== Prefix/suffix composition (48-bit and 64-bit forms)
+
+The draft encoding defines:
+
+* **Main** instructions: standalone instructions with their own semantics (16-bit or 32-bit).
+* **Prefix** instructions: do not have standalone semantics; they *augment* the following main/postfix instruction.
+* **Postfix** instructions: do not have standalone semantics; they must pair with a prefix.
+
+Common composed lengths:
+
+* **48-bit forms:** 16-bit prefix + 32-bit main/postfix (often used for larger immediates, e.g. `HL.*`)
+* **64-bit forms:** 32-bit prefix + 32-bit main/postfix (often used for `V.*` forms)
+
+In the JSON catalog, composed forms are represented as multiple `parts[]` in instruction-stream order.
+
+The codec generators pack multi-part instructions in *instruction-stream order*:
+
+* the first 32-bit word occupies bits `[31:0]`
+* the second 32-bit word occupies bits `[63:32]`
+
+[[encoding-namespaces]]
+=== Mnemonic namespaces (C./HL./V.)
+
+In the v0.2 catalog, mnemonic prefixes are used to distinguish families of encodings:
+
+* `C.*`: 16-bit compressed forms
+* `HL.*`: 48-bit “high-level” (extended immediate / address) forms
+* `V.*`: 64-bit vector forms (often represented as prefix + main parts in the catalog)
+
+The base scalar ISA uses unprefixed mnemonics (e.g. `add`, `ld`, `setc.*`, `bstart.*`).
+
+[[encoding-format-tags]]
+=== Decode format tags (Type A… / C.Type …)
+
+Each instruction part in the catalog may carry a decode tag (e.g. `Type A`, `Type F`, `C.Type D`). These tags describe
+the *field layout* used by that encoding family (which operands appear and where they are encoded).
+
+This manual does not attempt to normatively re-specify every bit position in every type; instead, it uses these tags
+as an indexing mechanism:
+
+* The authoritative bit ranges are in `parts[].segments[]` and `encoding.parts[].fields[]`.
+* The `Type`/`C.Type` tags are helpful for human navigation and for grouping similar instruction layouts.
+
+*Common 16-bit compressed decode tags (orientation only):*
+
+[cols="1,3",options="header"]
+|===
+|Tag |Typical operand fields
+|`C.Type A` |`SrcL`, `SrcR` (2-register)
+|`C.Type B` |`SrcL`, `imm5` (register + small immediate)
+|`C.Type C` |`SrcL`, `Func` (unary/function-class encodings)
+|`C.Type D` |`SrcL`, `RegDst` (register move / 2-reg-with-dest encodings)
+|`C.Type E` |`RegDst`, `imm5` (move-immediate / setret-like encodings)
+|`C.Type F` |`Func`, `imm5` (function + small immediate)
+|`C.Type G` |immediate-only (includes block markers like `C.BSTOP`)
+|`C.Type H` |larger immediate-only (e.g. `imm10`)
+|`C.Type I` |larger immediate-only (e.g. `imm12`, used by PC-relative `C.BSTART` forms)
+|===
+
+*Common 32-bit decode tags (orientation only):*
+
+[cols="1,3",options="header"]
+|===
+|Tag |Typical operand fields
+|`Type A` |`RegDst`, `SrcL`, `SrcR`, optional `SrcD` (3-source encodings)
+|`Type B` |`RegDst`, `SrcL`, `SrcR`, small `imm` + `SrcRType` (reg+reg+imm forms)
+|`Type C` |`SrcL`, `SrcR`, 2 immediates + `SrcRType` (immediate-heavy forms)
+|`Type D/E` |`SrcL`, `SrcR`, mid-size `imm` (often compare/bit/branch families)
+|`Type F/G/H/I` |`SrcL`, `RegDst` plus `simm/uimm` (load/store immediate forms)
+|`Type J/K` |large `imm` forms (e.g. long immediates / PC-relative and setret-class encodings)
+|===
+
+[[encoding-opcode-maps]]
+=== Opcode maps (high-level)
+
+The opcode database defines opcode maps for 16-bit (`C.*`) and 32-bit (base/extended) spaces. The maps below summarize the
+top-level allocation (exact sub-opcodes and fields are defined per instruction form in the catalog).
+
+*16-bit opcode map (selected high-level rows):*
+
+[cols="1,1,1,1,1",options="header"]
+|===
+|`bit[3:1] \\ bit[6:4]` |000 |001 |010 |111
+|000 |`C.BSTART` |- |- |-
+|001 |`C.BSTART DIRECT` |- |- |-
+|010 |`C.BSTART COND` |- |- |-
+|100 |`C.ADD/C.SUB/C.AND/C.OR` |- |- |-
+|101 |`C.LWI/C.LDI/C.SWI/C.SDI` |- |- |-
+|111 |- |- |- |48-bit prefix (16-bit prefix part)
+|===
+
+*32-bit opcode map (selected high-level rows):*
+
+[cols="1,1,1,1,1",options="header"]
+|===
+|`bit[3:1] \\ bit[6:4]` |000 |010 |100 |111
+|000 |`BSTART` |`ALU/ALUI/…` |`LDR/LDI/…` |64-bit prefix (32-bit prefix part)
+|011 |`PC-Relative/LUI/BRANCH/…` |- |- |-
+|101 |`Atomic/SYSCTRL/SSR/FP…` |- |- |-
+|110 |48/64-bit postfix (32-bit postfix part) |- |- |-
+|===
+
+These opcode maps are provided as orientation aids; refer to the generated instruction reference for a complete list of
+encodable forms.
+
+[[encoding-pc-relative]]
+=== PC-relative scaling for block targets
+
+For PC-relative block transitions and return-address materialization, offsets are halfword-scaled:
+
+* `target = TPC + (simm << 1)` for PC-relative `BSTART` / `C.BSTART` forms
+* `target = TPC + (uimm << 1)` / `TPC + (imm << 1)` for `setret` forms
+
+See <<progmodel-pc>> for the definition of `TPC` and how it applies to multi-part instruction forms.
+
+[[encoding-relaxation]]
+=== Code-size and encoding selection (guidance)
+
+Linx is designed to make common code sequences compact:
+
+* Prefer **16-bit compressed** forms (`C.*`) when constraints allow.
+* Prefer **48-bit fused** forms (commonly `HL.*`) over multi-instruction sequences when they eliminate extra
+  materialization steps (e.g. larger immediates).
+
+For long immediates and addresses, the recommended approach is to maximize use of **PC-relative** encodings and allow
+late-stage optimization:
+
+* Use link-time optimization / relaxation (assembler+linker or LTO pipeline) to choose the smallest valid encoding
+  based on final layout.
+* When multiple encodings are available (e.g. short PC-relative vs extended immediate forms), tooling should converge
+  on the shortest encoding that meets range/alignment and block-safety constraints.
+
+[[encoding-json]]
+=== The machine-readable catalog
+
+The authoritative encoding details live in `isa/v0.3/linxisa-v0.3.json`:
+
+* Each instruction form has `parts[].segments[]` describing `[msb:lsb]` bit ranges.
+* Each form includes derived `encoding` fields (`mask`, `match`, `pattern`, `fields`) suitable for generating
+  decoders/encoders (QEMU decodetree, LLVM TableGen, etc).
+
+The generated codec tables in `isa/generated/codecs/` are derived directly from the JSON and are the recommended entry point for
+tooling.
+
+[[encoding-diagrams]]
+=== Bitfield diagrams
+
+The following examples illustrate the encoding bitfield layout for representative instructions. These diagrams are automatically generated from the machine-readable catalog.
+
+32-bit R-type (register-register):
+
+image::../generated/encodings/enc_add.svg[ADD encoding,width=800]
+
+32-bit I-type (immediate):
+
+image::../generated/encodings/enc_addi.svg[ADDI encoding,width=800]
+
+16-bit compressed:
+
+image::../generated/encodings/enc_c_add.svg[C.ADD encoding,width=600]
+
+Vector 64-bit (prefix + postfix):
+
+image::../generated/encodings/enc_v_add_part1.svg[V.ADD encoding,width=800]
+
+[NOTE]
+====
+A complete set of encoding diagrams for all instructions is available in the `generated/encodings/` directory. These diagrams use color-coded fields to distinguish operand types:
+
+* **Blue**: opcode / funct
+* **Green**: destination register (rd)
+* **Orange**: source registers (rs1, rs2, rs3)
+* **Red**: immediate values
+* **Purple**: funct fields
+* **Gray**: reserved / unused
+====

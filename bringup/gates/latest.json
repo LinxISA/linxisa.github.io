@@ -1,0 +1,3782 @@
+{
+  "generated_at_utc": "2026-02-25 12:41:30Z",
+  "runs": [
+    {
+      "gates": [
+        {
+          "classification": "trap_loop_pc_0x31f85c",
+          "command": "python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "terminal: repeated [linx trap] pc=0x000000000031f85c"
+          ],
+          "evidence_type": "terminal",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "trap_loop_pc_0x31f85c",
+          "command": "python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "terminal: repeated [linx trap] pc=0x000000000031f85c"
+          ],
+          "evidence_type": "terminal",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "cosim_smoke_pass",
+          "command": "bash ${LINXCORE_ROOT}/tests/test_cosim_smoke.sh",
+          "domain": "RTL",
+          "evidence": [
+            "terminal: test_cosim_smoke.sh PASS"
+          ],
+          "evidence_type": "terminal",
+          "gate": "LinxCore co-sim smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 04:32:23Z",
+      "lane": "external",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-external",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${GLIBC_ROOT}",
+          "sha": "04e750e75b73957cf1c791535a3f4319534a52fc"
+        },
+        "linux": {
+          "path": "${LINUX_ROOT}",
+          "sha": "9e37586596e85a1985bef53f597d0c75e4a9a215"
+        },
+        "linxcore": {
+          "path": "${LINXCORE_ROOT}",
+          "sha": "fbb0450d98db2d9d33fb2e339cf32bc1a6c91493"
+        },
+        "llvm": {
+          "path": "${LLVM_ROOT}",
+          "sha": "8ee471fd9882e4d0099ff5425f12528e98fe8aaf"
+        },
+        "musl": {
+          "path": "${MUSL_ROOT}",
+          "sha": "missing"
+        },
+        "pycircuit": {
+          "path": "${PYCIRCUIT_ROOT}",
+          "sha": "edc3ef51110b339d64d034db39acb26e0a9a6c53"
+        },
+        "qemu": {
+          "path": "${QEMU_ROOT}",
+          "sha": "712f581e9a13f664118b3cf8c509b919c3ec4b87"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${QEMU_ROOT}/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=external QEMU=${QEMU_ROOT}/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 ALLOW_GLIBC_G1_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase2c/external/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:12:06Z",
+      "lane": "external",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-external-phase2c",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${GLIBC_ROOT}",
+          "sha": "04e750e75b73957cf1c791535a3f4319534a52fc"
+        },
+        "linux": {
+          "path": "${LINUX_ROOT}",
+          "sha": "9e37586596e85a1985bef53f597d0c75e4a9a215"
+        },
+        "linxcore": {
+          "path": "${LINXCORE_ROOT}",
+          "sha": "b3bbe65ee5fcecc69631b46554d4789122c57f2c"
+        },
+        "llvm": {
+          "path": "${LLVM_ROOT}",
+          "sha": "5289c65ce582a8d71fdaecc95b5a16eae43f9fcc"
+        },
+        "musl": {
+          "path": "${MUSL_ROOT}",
+          "sha": "missing"
+        },
+        "pycircuit": {
+          "path": "${PYCIRCUIT_ROOT}",
+          "sha": "273eff570b670aec8795c85c5c7223f2cd6b22a5"
+        },
+        "qemu": {
+          "path": "${QEMU_ROOT}",
+          "sha": "712f581e9a13f664118b3cf8c509b919c3ec4b87"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_or_allowed_blocked",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/lib_glibc_g1b.log"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${QEMU_ROOT}/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=external QEMU=${QEMU_ROOT}/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase3/external/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:37:03Z",
+      "lane": "external",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-external-phase3",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${GLIBC_ROOT}",
+          "sha": "04e750e75b73957cf1c791535a3f4319534a52fc"
+        },
+        "linux": {
+          "path": "${LINUX_ROOT}",
+          "sha": "9e37586596e85a1985bef53f597d0c75e4a9a215"
+        },
+        "linxcore": {
+          "path": "${LINXCORE_ROOT}",
+          "sha": "b3bbe65ee5fcecc69631b46554d4789122c57f2c"
+        },
+        "llvm": {
+          "path": "${LLVM_ROOT}",
+          "sha": "5289c65ce582a8d71fdaecc95b5a16eae43f9fcc"
+        },
+        "musl": {
+          "path": "${MUSL_ROOT}",
+          "sha": "missing"
+        },
+        "pycircuit": {
+          "path": "${PYCIRCUIT_ROOT}",
+          "sha": "273eff570b670aec8795c85c5c7223f2cd6b22a5"
+        },
+        "qemu": {
+          "path": "${QEMU_ROOT}",
+          "sha": "712f581e9a13f664118b3cf8c509b919c3ec4b87"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_or_allowed_blocked",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/lib_glibc_g1b.log"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${QEMU_ROOT}/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=external QEMU=${QEMU_ROOT}/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4/external/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:50:29Z",
+      "lane": "external",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-external-phase4",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${GLIBC_ROOT}",
+          "sha": "04e750e75b73957cf1c791535a3f4319534a52fc"
+        },
+        "linux": {
+          "path": "${LINUX_ROOT}",
+          "sha": "9e37586596e85a1985bef53f597d0c75e4a9a215"
+        },
+        "linxcore": {
+          "path": "${LINXCORE_ROOT}",
+          "sha": "b3bbe65ee5fcecc69631b46554d4789122c57f2c"
+        },
+        "llvm": {
+          "path": "${LLVM_ROOT}",
+          "sha": "5289c65ce582a8d71fdaecc95b5a16eae43f9fcc"
+        },
+        "musl": {
+          "path": "${MUSL_ROOT}",
+          "sha": "missing"
+        },
+        "pycircuit": {
+          "path": "${PYCIRCUIT_ROOT}",
+          "sha": "273eff570b670aec8795c85c5c7223f2cd6b22a5"
+        },
+        "qemu": {
+          "path": "${QEMU_ROOT}",
+          "sha": "712f581e9a13f664118b3cf8c509b919c3ec4b87"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${QEMU_ROOT}/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${QEMU_ROOT}/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_shared_libc_so_built",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${QEMU_ROOT}/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_pass",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/run_model_diff_suite.py --root ${LINXISA_ROOT} --suite ${LINXISA_ROOT}/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out ${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=external QEMU=${QEMU_ROOT}/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-external-phase4b/external/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 19:09:56Z",
+      "lane": "external",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-17-r1-external-phase4b",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${GLIBC_ROOT}",
+          "sha": "04e750e75b73957cf1c791535a3f4319534a52fc"
+        },
+        "linux": {
+          "path": "${LINUX_ROOT}",
+          "sha": "812f083bc29e075577b1a5ec7782b4ae9cebd428"
+        },
+        "linxcore": {
+          "path": "${LINXCORE_ROOT}",
+          "sha": "d9898156083b2174931ccf4c634421784fc1c881"
+        },
+        "llvm": {
+          "path": "${LLVM_ROOT}",
+          "sha": "55a7e27b80ba06bd3db9a098703256802d8fb9ea"
+        },
+        "musl": {
+          "path": "${MUSL_ROOT}",
+          "sha": "missing"
+        },
+        "pycircuit": {
+          "path": "${PYCIRCUIT_ROOT}",
+          "sha": "5fe8de17b648a997d49fa863d11418aa06abdea3"
+        },
+        "qemu": {
+          "path": "${QEMU_ROOT}",
+          "sha": "712f581e9a13f664118b3cf8c509b919c3ec4b87"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_shared_libc_so_built",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_pass",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/run_model_diff_suite.py --root ${LINXISA_ROOT} --suite ${LINXISA_ROOT}/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out ${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=1 RUN_MODEL_DIFF=1 RUN_CPP_GATES=1 CPP_MODE=phase-b RUN_CONSISTENCY_CHECKS=0 ALLOW_GLIBC_G1_BLOCKED=0 GLIBC_G1B_ALLOW_BLOCKED=0 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 19:41:53Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-17-r1-pin",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "5d20f2c3a1f33b5d81720638fee82ac091a635ff"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_fail_or_timeout",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_fail",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 RUN_GLIBC_G1=0 ALLOW_GLIBC_G1_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 10:47:22Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase2",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_fail_or_timeout",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_fail",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2b/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 10:59:27Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase2b",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 ALLOW_GLIBC_G1_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase2c/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:07:09Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase2c",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_or_allowed_blocked",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/lib_glibc_g1b.log"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase3/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:31:36Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase3",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_or_allowed_blocked",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/lib_glibc_g1b.log"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:45:52Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase4",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_shared_libc_so_built",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=1 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=0 ALLOW_GLIBC_G1_BLOCKED=1 GLIBC_G1B_ALLOW_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-phase4b/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 11:57:59Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-phase4b",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINUX_ROOT}/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=1 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "unowned",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=1 RUN_GLIBC_G1=0 ALLOW_GLIBC_G1_BLOCKED=1 bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-17-r1-pin-stable/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "unowned",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-17 10:38:57Z",
+      "lane": "pin",
+      "lane_policy": "legacy",
+      "profile": "dev",
+      "run_id": "2026-02-17-r1-pin-stable",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "28633bc1a719ef4fa27c63f827b07cf7d1f6f7c6"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "37a93dd5c49b5fda807fd204edf2547c3493319c"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "10f457bf75996c96901b91b2bd05e39fee20ab1c"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "d390d4890d5863697935275a3aa2598759b7cc00"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "a079402e5d09e5a86bc703eb203d735ed057708f"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "f9e7978f67374572cc1b0f032fd1ed85470e1f11"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "feee44880b063477a4908c496ffb8139096a574e"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "d8bfcfcb7909a261a689f19d469cb77f59ba940a"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_fail_or_timeout",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_fail",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LLVM_ROOT}/build-linxisa-clang/bin/clang LLD=${LLVM_ROOT}/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_busybox_rootfs_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/busybox_rootfs/boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/kernel_busybox_rootfs.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux busybox rootfs boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_wrapper_fail",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "runtime_mode_failure",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_fail",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/run_model_diff_suite.py --root ${LINXISA_ROOT} --suite ${LINXISA_ROOT}/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out ${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=external QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=0 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=1 RUN_MODEL_DIFF=1 RUN_CPP_GATES=0 CPP_MODE=phase-b RUN_CONSISTENCY_CHECKS=0 ALLOW_GLIBC_G1_BLOCKED=0 GLIBC_G1B_ALLOW_BLOCKED=0 MULTI_AGENT_MANIFEST=${LINXISA_ROOT}/docs/bringup/agent_runs/manifest.yaml MULTI_AGENT_WAIVERS=${LINXISA_ROOT}/docs/bringup/agent_runs/waivers.yaml MULTI_AGENT_CHECKLISTS_ROOT=${LINXISA_ROOT}/docs/bringup/agent_runs/checklists MULTI_AGENT_REPORT=${LINXISA_ROOT}/docs/bringup/gates/latest.json MULTI_AGENT_LANE=pin MULTI_AGENT_RUN_ID=2026-02-23-r2-pin-reassess MULTI_AGENT_OUT=${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/multi_agent_summary.strict_cross.json bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r2-pin-reassess/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-23 04:52:01Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-23-r2-pin-reassess",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "f26077d084862e4edbc2d5729fd2c3732ba29026"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "284e7fc25b42de2bed13f6afbf25e1f6f135b218"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "566a829372d54f455fe85f1110d5ee2e0185dd17"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "9be2cd701fa568d4257eca2b3f2f86423480c054"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "c2f015644441d45dddc5fd706c6b1a188967a2ea"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "c474cbf83190772306b3e01b2ad1e52259f0e1d3"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "603e6ca3a4940d052720f68ae60b86c2e484e774"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "a8958dd84ce2df4165e9f9d7bf4f27f40e49b0da"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang LLD=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang LLD=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_busybox_rootfs_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/busybox_rootfs/boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/kernel_busybox_rootfs.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux busybox rootfs boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_wrapper_fail",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "runtime_mode_failure",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_fail",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/run_model_diff_suite.py --root ${LINXISA_ROOT} --suite ${LINXISA_ROOT}/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out ${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=pin QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=0 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=1 RUN_MODEL_DIFF=1 RUN_CPP_GATES=0 CPP_MODE=phase-b RUN_CONSISTENCY_CHECKS=0 ALLOW_GLIBC_G1_BLOCKED=0 GLIBC_G1B_ALLOW_BLOCKED=0 MULTI_AGENT_MANIFEST=${LINXISA_ROOT}/docs/bringup/agent_runs/manifest.yaml MULTI_AGENT_WAIVERS=${LINXISA_ROOT}/docs/bringup/agent_runs/waivers.yaml MULTI_AGENT_CHECKLISTS_ROOT=${LINXISA_ROOT}/docs/bringup/agent_runs/checklists MULTI_AGENT_REPORT=${LINXISA_ROOT}/docs/bringup/gates/latest.json MULTI_AGENT_LANE=pin MULTI_AGENT_RUN_ID=2026-02-23-r4-pin-qemu-linux-ctxfix MULTI_AGENT_OUT=${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/multi_agent_summary.strict_cross.json bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r4-pin-qemu-linux-ctxfix/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-23 08:14:19Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-23-r4-pin-qemu-linux-ctxfix",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "f26077d084862e4edbc2d5729fd2c3732ba29026"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "c7fe5b9db245195f534052a9ba67764bf10857fc"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "d33e82d4cdf4839c5c143c2fd8abcb228ae49287"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "9be2cd701fa568d4257eca2b3f2f86423480c054"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "c2f015644441d45dddc5fd706c6b1a188967a2ea"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "c474cbf83190772306b3e01b2ad1e52259f0e1d3"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "603e6ca3a4940d052720f68ae60b86c2e484e774"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "2dd7ea383e6bae5af17bfcdec3cf42d9fa9509e7"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests && CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir ${LINXISA_ROOT}/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang LLD=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd ${LINXISA_ROOT}/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/clang LLD=${LINXISA_ROOT}/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/check26_contract.py --root ${LINXISA_ROOT}",
+          "domain": "ISA",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_busybox_rootfs_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/busybox_rootfs/boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/kernel_busybox_rootfs.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux busybox rootfs boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 python3 ${LINXISA_ROOT}/kernel/linux/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_wrapper_fail",
+          "command": "cd ${LINXISA_ROOT} && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/lib_glibc_g1b.log",
+            "summary:${LINXISA_ROOT}/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "runtime_mode_failure",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 python3 ${LINXISA_ROOT}/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu ${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_fail",
+          "command": "python3 ${LINXISA_ROOT}/tools/bringup/run_model_diff_suite.py --root ${LINXISA_ROOT} --suite ${LINXISA_ROOT}/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out ${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd ${LINXISA_ROOT} && SKIP_BUILD=1 TOOLCHAIN_LANE=pin QEMU_LANE=pin QEMU=${LINXISA_ROOT}/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=0 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=1 RUN_MODEL_DIFF=1 RUN_CPP_GATES=0 CPP_MODE=phase-b RUN_CONSISTENCY_CHECKS=0 ALLOW_GLIBC_G1_BLOCKED=0 GLIBC_G1B_ALLOW_BLOCKED=0 MULTI_AGENT_MANIFEST=${LINXISA_ROOT}/docs/bringup/agent_runs/manifest.yaml MULTI_AGENT_WAIVERS=${LINXISA_ROOT}/docs/bringup/agent_runs/waivers.yaml MULTI_AGENT_CHECKLISTS_ROOT=${LINXISA_ROOT}/docs/bringup/agent_runs/checklists MULTI_AGENT_REPORT=${LINXISA_ROOT}/docs/bringup/gates/latest.json MULTI_AGENT_LANE=pin MULTI_AGENT_RUN_ID=2026-02-23-r5-pin-ctx-rootfs MULTI_AGENT_OUT=${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/multi_agent_summary.strict_cross.json bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:${LINXISA_ROOT}/docs/bringup/gates/logs/2026-02-23-r5-pin-ctx-rootfs/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-23 08:30:41Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-23-r5-pin-ctx-rootfs",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "f26077d084862e4edbc2d5729fd2c3732ba29026"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "c7fe5b9db245195f534052a9ba67764bf10857fc"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "d33e82d4cdf4839c5c143c2fd8abcb228ae49287"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "9be2cd701fa568d4257eca2b3f2f86423480c054"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "c2f015644441d45dddc5fd706c6b1a188967a2ea"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "c474cbf83190772306b3e01b2ad1e52259f0e1d3"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "603e6ca3a4940d052720f68ae60b86c2e484e774"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "2dd7ea383e6bae5af17bfcdec3cf42d9fa9509e7"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests && CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=/Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests && CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=/Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd /Users/zhoubot/linx-isa/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang LLD=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd /Users/zhoubot/linx-isa/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang LLD=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 /Users/zhoubot/linx-isa/tools/bringup/check26_contract.py --root /Users/zhoubot/linx-isa",
+          "domain": "ISA",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_busybox_rootfs_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/busybox_rootfs/boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/kernel_busybox_rootfs.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux busybox rootfs boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_fail",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_wrapper_fail",
+          "command": "cd /Users/zhoubot/linx-isa && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/lib_glibc_g1b.log",
+            "summary:/Users/zhoubot/linx-isa/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 python3 /Users/zhoubot/linx-isa/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu /Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_fail",
+          "command": "python3 /Users/zhoubot/linx-isa/tools/bringup/run_model_diff_suite.py --root /Users/zhoubot/linx-isa --suite /Users/zhoubot/linx-isa/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out /Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_fail",
+          "command": "cd /Users/zhoubot/linx-isa && SKIP_BUILD=1 TOOLCHAIN_LANE=pin QEMU_LANE=pin QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 LINX_DISABLE_TIMER_IRQ=0 LINX_EMU_DISABLE_TIMER_IRQ=0 RUN_GLIBC_G1=0 RUN_GLIBC_G1B=1 RUN_MODEL_DIFF=1 RUN_CPP_GATES=0 CPP_MODE=phase-b RUN_CONSISTENCY_CHECKS=0 ALLOW_GLIBC_G1_BLOCKED=0 GLIBC_G1B_ALLOW_BLOCKED=0 MULTI_AGENT_MANIFEST=/Users/zhoubot/linx-isa/docs/bringup/agent_runs/manifest.yaml MULTI_AGENT_WAIVERS=/Users/zhoubot/linx-isa/docs/bringup/agent_runs/waivers.yaml MULTI_AGENT_CHECKLISTS_ROOT=/Users/zhoubot/linx-isa/docs/bringup/agent_runs/checklists MULTI_AGENT_REPORT=/Users/zhoubot/linx-isa/docs/bringup/gates/latest.json MULTI_AGENT_LANE=pin MULTI_AGENT_RUN_ID=2026-02-24-r1-pin-timeron MULTI_AGENT_OUT=/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/multi_agent_summary.strict_cross.json bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-24-r1-pin-timeron/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "fail",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-24 22:05:58Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-24-r1-pin-timeron",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "69493c1b395a23546cab196947d6424003a9f5ed"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "7326fc7cc9338ffde3e84daa82269b68b691765f"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "16eca62df97c79088861f8979c6b1ceeeb281b73"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "70de88fbedd6dd1c53b6c0d06df84dd84ed782e9"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "4e3d23f6ee81b399bdd6125eb30922dc6ddcff85"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "eedfeaa4df3d07fc7f3cefb13641bf6eb000217a"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "5fe5e8304a993b6abf341a4a1138bb48c167c135"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "56b77eae03de6c89ba309b35ce1256046b8e13e0"
+        }
+      },
+      "trace_schema_version": "1.0"
+    },
+    {
+      "gates": [
+        {
+          "classification": "compile_pass_linx32",
+          "command": "cd /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests && CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx32-linx-none-elf OUT_DIR=/Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx32 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/compiler_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "compile_pass_linx64",
+          "command": "cd /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests && CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang TARGET=linx64-linx-none-elf OUT_DIR=/Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx64 ./run.sh",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/compiler_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "AVS compile suites (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx32",
+          "command": "python3 /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx32 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/compiler_cov_linx32.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx32)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "mnemonic_coverage_100_linx64",
+          "command": "python3 /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/analyze_coverage.py --out-dir /Users/zhoubot/linx-isa/avs/compiler/linx-llvm/tests/out-linx64 --fail-under 100",
+          "domain": "Compiler",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/compiler_cov_linx64.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Coverage 100% (linx64)",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "all_suites_pass",
+          "command": "cd /Users/zhoubot/linx-isa/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang LLD=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 ./run_tests.sh --all --timeout 10",
+          "domain": "Emulator",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/emu_all_suites.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU all suites",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_system_pass",
+          "command": "cd /Users/zhoubot/linx-isa/avs/qemu && LINX_DISABLE_TIMER_IRQ=0 CLANG=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/clang LLD=/Users/zhoubot/linx-isa/compiler/llvm/build-linxisa-clang/bin/ld.lld QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 ./check_system_strict.sh",
+          "domain": "Emulator",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/emu_strict_system.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU strict system",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "contract_ok",
+          "command": "python3 /Users/zhoubot/linx-isa/tools/bringup/check26_contract.py --root /Users/zhoubot/linx-isa",
+          "domain": "ISA",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/isa_check26.log"
+          ],
+          "evidence_type": "log",
+          "gate": "check26 contract",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_busybox_rootfs_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/busybox_rootfs/boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/kernel_busybox_rootfs.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux busybox rootfs boot",
+          "owner": "bringup",
+          "required": false,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_full_boot_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/initramfs/full_boot.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/kernel_full_boot.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs full boot",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_smoke_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/initramfs/smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/kernel_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs smoke",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "linux_virtio_disk_smoke_pass_cmdline_fallback",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 QEMU=/Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 python3 /Users/zhoubot/linx-isa/kernel/linux/tools/linxisa/initramfs/virtio_disk_smoke.py",
+          "domain": "Kernel",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/kernel_virtio_disk_smoke.log"
+          ],
+          "evidence_type": "log",
+          "gate": "Linux initramfs virtio disk smoke",
+          "owner": "bringup",
+          "required": false,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "glibc_g1b_pass_shared_libc_so_built",
+          "command": "cd /Users/zhoubot/linx-isa && GLIBC_G1B_ALLOW_BLOCKED=0 bash lib/glibc/tools/linx/build_linx64_glibc_g1b.sh",
+          "domain": "Library",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/lib_glibc_g1b.log",
+            "summary:/Users/zhoubot/linx-isa/out/libc/glibc/logs/g1b-summary.txt"
+          ],
+          "evidence_type": "log",
+          "gate": "glibc G1b shared libc.so",
+          "owner": "glibc",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "runtime_pass",
+          "command": "LINX_DISABLE_TIMER_IRQ=0 python3 /Users/zhoubot/linx-isa/avs/qemu/run_musl_smoke.py --mode phase-b --link both --qemu /Users/zhoubot/linx-isa/emulator/qemu/build/qemu-system-linx64 --timeout 90",
+          "domain": "Library",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/lib_musl_both.log"
+          ],
+          "evidence_type": "log",
+          "gate": "musl runtime static+shared",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "model_diff_pass",
+          "command": "python3 /Users/zhoubot/linx-isa/tools/bringup/run_model_diff_suite.py --root /Users/zhoubot/linx-isa --suite /Users/zhoubot/linx-isa/avs/model/linx_model_diff_suite.yaml --profile release-strict --trace-schema-version 1.0 --report-out /Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/model_diff_summary.json",
+          "domain": "Model",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/model_diff_suite.log"
+          ],
+          "evidence_type": "log",
+          "gate": "QEMU vs model differential suite",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        },
+        {
+          "classification": "strict_cross_repo_pass",
+          "command": "cd /Users/zhoubot/linx-isa && LINX_BRINGUP_PROFILE=release-strict bash tools/regression/strict_cross_repo.sh",
+          "domain": "Regression",
+          "evidence": [
+            "log:/Users/zhoubot/linx-isa/docs/bringup/gates/logs/2026-02-25-r2-pin-lanefix/pin/reg_strict_cross_repo.log"
+          ],
+          "evidence_type": "log",
+          "gate": "strict_cross_repo.sh",
+          "owner": "bringup",
+          "required": true,
+          "status": "pass",
+          "waived": false
+        }
+      ],
+      "generated_at_utc": "2026-02-25 12:41:30Z",
+      "lane": "pin",
+      "lane_policy": "external+pin-required",
+      "profile": "release-strict",
+      "run_id": "2026-02-25-r2-pin-lanefix",
+      "sha_manifest": {
+        "glibc": {
+          "path": "${LINXISA_ROOT}/lib/glibc",
+          "sha": "69493c1b395a23546cab196947d6424003a9f5ed"
+        },
+        "linux": {
+          "path": "${LINXISA_ROOT}/kernel/linux",
+          "sha": "7326fc7cc9338ffde3e84daa82269b68b691765f"
+        },
+        "linx-isa": {
+          "path": "${LINXISA_ROOT}",
+          "sha": "16eca62df97c79088861f8979c6b1ceeeb281b73"
+        },
+        "linxcore": {
+          "path": "${LINXISA_ROOT}/rtl/LinxCore",
+          "sha": "70de88fbedd6dd1c53b6c0d06df84dd84ed782e9"
+        },
+        "llvm": {
+          "path": "${LINXISA_ROOT}/compiler/llvm",
+          "sha": "4e3d23f6ee81b399bdd6125eb30922dc6ddcff85"
+        },
+        "musl": {
+          "path": "${LINXISA_ROOT}/lib/musl",
+          "sha": "eedfeaa4df3d07fc7f3cefb13641bf6eb000217a"
+        },
+        "pycircuit": {
+          "path": "${LINXISA_ROOT}/tools/pyCircuit",
+          "sha": "5fe5e8304a993b6abf341a4a1138bb48c167c135"
+        },
+        "qemu": {
+          "path": "${LINXISA_ROOT}/emulator/qemu",
+          "sha": "56b77eae03de6c89ba309b35ce1256046b8e13e0"
+        }
+      },
+      "trace_schema_version": "1.0"
+    }
+  ],
+  "schema_version": 2
+}

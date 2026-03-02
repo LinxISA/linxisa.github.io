@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_dc_csw]]
+==== DC.CSW
+
+*Syntax:* dc.csw SrcL
+
+*Description:* -
+
+*Encoding:*
+
+image::../generated/encodings/enc_dc_csw.svg[DC.CSW encoding,width=800]
+
+*Uop-Class:* SYS
+
+*Compression:* L32 (len=32)
+
+*Uop-Class payload:* `{"note": "User confirmed A", "source": "group_rule", "sys_kind": "CACHE_MAINT", "uop_kind": "SYS"}`

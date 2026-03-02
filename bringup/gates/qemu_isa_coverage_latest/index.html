@@ -1,0 +1,1621 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Linx Instruction Set Architecture">
+      
+      
+      
+        <link rel="canonical" href="https://linxisa.github.io/bringup/gates/qemu_isa_coverage_latest/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../architecture/isa-manual/src/images/linxisa-logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.3">
+    
+    
+      
+        <title>ISA vs QEMU Coverage Snapshot - LinxISA</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#isa-vs-qemu-coverage-snapshot" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="LinxISA" class="md-header__button md-logo" aria-label="LinxISA" data-md-component="logo">
+      
+  <img src="../../../architecture/isa-manual/src/images/linxisa-logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            LinxISA
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ISA vs QEMU Coverage Snapshot
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/LinxISA/linx-isa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LinxISA/linx-isa
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="LinxISA" class="md-nav__button md-logo" aria-label="LinxISA" data-md-component="logo">
+      
+  <img src="../../../architecture/isa-manual/src/images/linxisa-logo.svg" alt="logo">
+
+    </a>
+    LinxISA
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/LinxISA/linx-isa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    LinxISA/linx-isa
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GETTING_STARTED/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/v0.3-architecture-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.3 Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/isa-manual/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ISA Manual (AsciiDoc)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture/v0.4-draft/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.4 Draft
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bring-up
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bring-up
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../PROGRESS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Progress
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../GATE_STATUS/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gate Status
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../CHECK26_CONTRACT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Check26 Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../MATURITY_PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Maturity Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/linxisa-assembly-agent-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Assembly Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/linxisa-call-ret-contract/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Call/Ret Contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/encoding_space_report/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encoding Space Report
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Releases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../releases/v0.3.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.3.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/navigation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../project/repository-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Repository Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#coverage-by-prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Coverage By Prefix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-by-prefix" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing By Prefix
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unmapped-qemu-mnemonics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unmapped QEMU Mnemonics
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#missing-spec-mnemonics-first-200" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Missing Spec Mnemonics (First 200)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="isa-vs-qemu-coverage-snapshot">ISA vs QEMU Coverage Snapshot<a class="headerlink" href="#isa-vs-qemu-coverage-snapshot" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Generated (UTC): <code>2026-02-25 13:12:48Z</code></li>
+<li>Spec unique mnemonics: <code>710</code></li>
+<li>QEMU unique decode mnemonics (non-internal): <code>322</code></li>
+<li>QEMU mapped spec mnemonics: <code>311</code></li>
+<li>Coverage: <code>311/710</code> (<code>43.8%</code>)</li>
+<li>Missing spec mnemonics: <code>399</code></li>
+<li>Unmapped QEMU mnemonics: <code>0</code></li>
+</ul>
+<h2 id="coverage-by-prefix">Coverage By Prefix<a class="headerlink" href="#coverage-by-prefix" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>ACRC</code>: <code>1</code></li>
+<li><code>ACRE</code>: <code>1</code></li>
+<li><code>ADD</code>: <code>1</code></li>
+<li><code>ADDI</code>: <code>1</code></li>
+<li><code>ADDIW</code>: <code>1</code></li>
+<li><code>ADDTPC</code>: <code>1</code></li>
+<li><code>ADDW</code>: <code>1</code></li>
+<li><code>AND</code>: <code>1</code></li>
+<li><code>ANDI</code>: <code>1</code></li>
+<li><code>ANDIW</code>: <code>1</code></li>
+<li><code>ANDW</code>: <code>1</code></li>
+<li><code>B</code>: <code>10</code></li>
+<li><code>BCNT</code>: <code>1</code></li>
+<li><code>BIC</code>: <code>1</code></li>
+<li><code>BIS</code>: <code>1</code></li>
+<li><code>BSTART</code>: <code>14</code></li>
+<li><code>BSTOP</code>: <code>1</code></li>
+<li><code>BXS</code>: <code>1</code></li>
+<li><code>BXU</code>: <code>1</code></li>
+<li><code>C</code>: <code>27</code></li>
+<li><code>CLZ</code>: <code>1</code></li>
+<li><code>CMP</code>: <code>16</code></li>
+<li><code>CSEL</code>: <code>1</code></li>
+<li><code>CTZ</code>: <code>1</code></li>
+<li><code>DIV</code>: <code>1</code></li>
+<li><code>DIVU</code>: <code>1</code></li>
+<li><code>DIVUW</code>: <code>1</code></li>
+<li><code>DIVW</code>: <code>1</code></li>
+<li><code>EBREAK</code>: <code>1</code></li>
+<li><code>ERCOV</code>: <code>1</code></li>
+<li><code>ESAVE</code>: <code>1</code></li>
+<li><code>FABS</code>: <code>1</code></li>
+<li><code>FADD</code>: <code>1</code></li>
+<li><code>FCVT</code>: <code>1</code></li>
+<li><code>FCVTZ</code>: <code>1</code></li>
+<li><code>FDIV</code>: <code>1</code></li>
+<li><code>FENCE</code>: <code>2</code></li>
+<li><code>FENTRY</code>: <code>1</code></li>
+<li><code>FEQ</code>: <code>1</code></li>
+<li><code>FEXIT</code>: <code>1</code></li>
+<li><code>FGE</code>: <code>1</code></li>
+<li><code>FLT</code>: <code>1</code></li>
+<li><code>FMUL</code>: <code>1</code></li>
+<li><code>FRET</code>: <code>2</code></li>
+<li><code>FSUB</code>: <code>1</code></li>
+<li><code>HL</code>: <code>63</code></li>
+<li><code>LB</code>: <code>2</code></li>
+<li><code>LBI</code>: <code>1</code></li>
+<li><code>LBU</code>: <code>2</code></li>
+<li><code>LBUI</code>: <code>1</code></li>
+<li><code>LD</code>: <code>3</code></li>
+<li><code>LDI</code>: <code>1</code></li>
+<li><code>LH</code>: <code>2</code></li>
+<li><code>LHI</code>: <code>1</code></li>
+<li><code>LHU</code>: <code>2</code></li>
+<li><code>LHUI</code>: <code>1</code></li>
+<li><code>LR</code>: <code>2</code></li>
+<li><code>LUI</code>: <code>1</code></li>
+<li><code>LW</code>: <code>3</code></li>
+<li><code>LWI</code>: <code>1</code></li>
+<li><code>LWU</code>: <code>2</code></li>
+<li><code>LWUI</code>: <code>1</code></li>
+<li><code>MADD</code>: <code>1</code></li>
+<li><code>MADDW</code>: <code>1</code></li>
+<li><code>MAX</code>: <code>1</code></li>
+<li><code>MAXU</code>: <code>1</code></li>
+<li><code>MCOPY</code>: <code>1</code></li>
+<li><code>MIN</code>: <code>1</code></li>
+<li><code>MINU</code>: <code>1</code></li>
+<li><code>MSET</code>: <code>1</code></li>
+<li><code>MUL</code>: <code>1</code></li>
+<li><code>MULW</code>: <code>1</code></li>
+<li><code>OR</code>: <code>1</code></li>
+<li><code>ORI</code>: <code>1</code></li>
+<li><code>ORIW</code>: <code>1</code></li>
+<li><code>ORW</code>: <code>1</code></li>
+<li><code>REM</code>: <code>1</code></li>
+<li><code>REMU</code>: <code>1</code></li>
+<li><code>REMUW</code>: <code>1</code></li>
+<li><code>REMW</code>: <code>1</code></li>
+<li><code>REV</code>: <code>1</code></li>
+<li><code>SB</code>: <code>2</code></li>
+<li><code>SBI</code>: <code>1</code></li>
+<li><code>SC</code>: <code>2</code></li>
+<li><code>SCVTF</code>: <code>1</code></li>
+<li><code>SD</code>: <code>3</code></li>
+<li><code>SDI</code>: <code>1</code></li>
+<li><code>SETC</code>: <code>17</code></li>
+<li><code>SETRET</code>: <code>1</code></li>
+<li><code>SH</code>: <code>3</code></li>
+<li><code>SHI</code>: <code>1</code></li>
+<li><code>SLL</code>: <code>1</code></li>
+<li><code>SLLI</code>: <code>1</code></li>
+<li><code>SLLIW</code>: <code>1</code></li>
+<li><code>SLLW</code>: <code>1</code></li>
+<li><code>SRA</code>: <code>1</code></li>
+<li><code>SRAI</code>: <code>1</code></li>
+<li><code>SRAIW</code>: <code>1</code></li>
+<li><code>SRAW</code>: <code>1</code></li>
+<li><code>SRL</code>: <code>1</code></li>
+<li><code>SRLI</code>: <code>1</code></li>
+<li><code>SRLIW</code>: <code>1</code></li>
+<li><code>SRLW</code>: <code>1</code></li>
+<li><code>SSRGET</code>: <code>1</code></li>
+<li><code>SSRSET</code>: <code>1</code></li>
+<li><code>SSRSWAP</code>: <code>1</code></li>
+<li><code>SUB</code>: <code>1</code></li>
+<li><code>SUBI</code>: <code>1</code></li>
+<li><code>SUBIW</code>: <code>1</code></li>
+<li><code>SUBW</code>: <code>1</code></li>
+<li><code>SW</code>: <code>3</code></li>
+<li><code>SWAPD</code>: <code>1</code></li>
+<li><code>SWAPW</code>: <code>1</code></li>
+<li><code>SWI</code>: <code>1</code></li>
+<li><code>TLB</code>: <code>1</code></li>
+<li><code>UCVTF</code>: <code>1</code></li>
+<li><code>V</code>: <code>30</code></li>
+<li><code>XOR</code>: <code>1</code></li>
+<li><code>XORI</code>: <code>1</code></li>
+<li><code>XORIW</code>: <code>1</code></li>
+<li><code>XORW</code>: <code>1</code></li>
+</ul>
+<h2 id="missing-by-prefix">Missing By Prefix<a class="headerlink" href="#missing-by-prefix" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>ASSERT</code>: <code>1</code></li>
+<li><code>B</code>: <code>7</code></li>
+<li><code>BC</code>: <code>2</code></li>
+<li><code>BSE</code>: <code>1</code></li>
+<li><code>BSTART</code>: <code>6</code></li>
+<li><code>BWE</code>: <code>1</code></li>
+<li><code>BWI</code>: <code>1</code></li>
+<li><code>BWT</code>: <code>1</code></li>
+<li><code>C</code>: <code>11</code></li>
+<li><code>DC</code>: <code>8</code></li>
+<li><code>FCVTA</code>: <code>1</code></li>
+<li><code>FCVTM</code>: <code>1</code></li>
+<li><code>FCVTN</code>: <code>1</code></li>
+<li><code>FCVTP</code>: <code>1</code></li>
+<li><code>FEQS</code>: <code>1</code></li>
+<li><code>FEXP</code>: <code>1</code></li>
+<li><code>FGES</code>: <code>1</code></li>
+<li><code>FLTS</code>: <code>1</code></li>
+<li><code>FMADD</code>: <code>1</code></li>
+<li><code>FMAX</code>: <code>1</code></li>
+<li><code>FMIN</code>: <code>1</code></li>
+<li><code>FMSUB</code>: <code>1</code></li>
+<li><code>FNE</code>: <code>1</code></li>
+<li><code>FNES</code>: <code>1</code></li>
+<li><code>FNMADD</code>: <code>1</code></li>
+<li><code>FNMSUB</code>: <code>1</code></li>
+<li><code>FRECIP</code>: <code>1</code></li>
+<li><code>FSQRT</code>: <code>1</code></li>
+<li><code>HL</code>: <code>131</code></li>
+<li><code>IC</code>: <code>2</code></li>
+<li><code>J</code>: <code>1</code></li>
+<li><code>JR</code>: <code>1</code></li>
+<li><code>LD</code>: <code>7</code></li>
+<li><code>LDI</code>: <code>1</code></li>
+<li><code>LHI</code>: <code>1</code></li>
+<li><code>LHUI</code>: <code>1</code></li>
+<li><code>LR</code>: <code>2</code></li>
+<li><code>LSRGET</code>: <code>1</code></li>
+<li><code>LW</code>: <code>7</code></li>
+<li><code>LWI</code>: <code>1</code></li>
+<li><code>LWUI</code>: <code>1</code></li>
+<li><code>MULU</code>: <code>1</code></li>
+<li><code>MULUW</code>: <code>1</code></li>
+<li><code>PRF</code>: <code>1</code></li>
+<li><code>PRFI</code>: <code>1</code></li>
+<li><code>SC</code>: <code>2</code></li>
+<li><code>SD</code>: <code>8</code></li>
+<li><code>SDI</code>: <code>1</code></li>
+<li><code>SHI</code>: <code>1</code></li>
+<li><code>SW</code>: <code>8</code></li>
+<li><code>SWAPB</code>: <code>1</code></li>
+<li><code>SWAPH</code>: <code>1</code></li>
+<li><code>SWI</code>: <code>1</code></li>
+<li><code>TLB</code>: <code>3</code></li>
+<li><code>V</code>: <code>154</code></li>
+<li><code>XB</code>: <code>1</code></li>
+</ul>
+<h2 id="unmapped-qemu-mnemonics">Unmapped QEMU Mnemonics<a class="headerlink" href="#unmapped-qemu-mnemonics" title="Permanent link">&para;</a></h2>
+<ul>
+<li>none</li>
+</ul>
+<h2 id="missing-spec-mnemonics-first-200">Missing Spec Mnemonics (First 200)<a class="headerlink" href="#missing-spec-mnemonics-first-200" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>ASSERT</code></li>
+<li><code>B.EQ</code></li>
+<li><code>B.GE</code></li>
+<li><code>B.GEU</code></li>
+<li><code>B.IOD</code></li>
+<li><code>B.LT</code></li>
+<li><code>B.LTU</code></li>
+<li><code>B.NE</code></li>
+<li><code>BC.IALL</code></li>
+<li><code>BC.IVA</code></li>
+<li><code>BSE</code></li>
+<li><code>BSTART.FIXP</code></li>
+<li><code>BSTART.FP</code></li>
+<li><code>BSTART.STD</code></li>
+<li><code>BSTART.SYS</code></li>
+<li><code>BSTART.TEPL</code></li>
+<li><code>BSTART.TMOV</code></li>
+<li><code>BWE</code></li>
+<li><code>BWI</code></li>
+<li><code>BWT</code></li>
+<li><code>C.B.DIM</code></li>
+<li><code>C.BSTART</code></li>
+<li><code>C.BSTART.FP</code></li>
+<li><code>C.BSTART.MPAR</code></li>
+<li><code>C.BSTART.MSEQ</code></li>
+<li><code>C.BSTART.SYS</code></li>
+<li><code>C.BSTART.VPAR</code></li>
+<li><code>C.BSTART.VSEQ</code></li>
+<li><code>C.EBREAK</code></li>
+<li><code>C.SETRET</code></li>
+<li><code>C.SSRGET</code></li>
+<li><code>DC.CISW</code></li>
+<li><code>DC.CIVA</code></li>
+<li><code>DC.CSW</code></li>
+<li><code>DC.CVA</code></li>
+<li><code>DC.IALL</code></li>
+<li><code>DC.ISW</code></li>
+<li><code>DC.IVA</code></li>
+<li><code>DC.ZVA</code></li>
+<li><code>FCVTA</code></li>
+<li><code>FCVTM</code></li>
+<li><code>FCVTN</code></li>
+<li><code>FCVTP</code></li>
+<li><code>FEQS</code></li>
+<li><code>FEXP</code></li>
+<li><code>FGES</code></li>
+<li><code>FLTS</code></li>
+<li><code>FMADD</code></li>
+<li><code>FMAX</code></li>
+<li><code>FMIN</code></li>
+<li><code>FMSUB</code></li>
+<li><code>FNE</code></li>
+<li><code>FNES</code></li>
+<li><code>FNMADD</code></li>
+<li><code>FNMSUB</code></li>
+<li><code>FRECIP</code></li>
+<li><code>FSQRT</code></li>
+<li><code>HL.BFI</code></li>
+<li><code>HL.BSTART.FP</code></li>
+<li><code>HL.BSTART.SYS</code></li>
+<li><code>HL.CASB</code></li>
+<li><code>HL.CASD</code></li>
+<li><code>HL.CASH</code></li>
+<li><code>HL.CASW</code></li>
+<li><code>HL.CCAT</code></li>
+<li><code>HL.CCATW</code></li>
+<li><code>HL.DIV</code></li>
+<li><code>HL.DIVU</code></li>
+<li><code>HL.DIVUW</code></li>
+<li><code>HL.DIVW</code></li>
+<li><code>HL.LB.PO</code></li>
+<li><code>HL.LB.PR</code></li>
+<li><code>HL.LBI</code></li>
+<li><code>HL.LBI.PO</code></li>
+<li><code>HL.LBI.PR</code></li>
+<li><code>HL.LBIP</code></li>
+<li><code>HL.LBP</code></li>
+<li><code>HL.LBU.PO</code></li>
+<li><code>HL.LBU.PR</code></li>
+<li><code>HL.LBUI</code></li>
+<li><code>HL.LBUI.PO</code></li>
+<li><code>HL.LBUI.PR</code></li>
+<li><code>HL.LBUIP</code></li>
+<li><code>HL.LBUP</code></li>
+<li><code>HL.LD.PO</code></li>
+<li><code>HL.LD.PR</code></li>
+<li><code>HL.LDI</code></li>
+<li><code>HL.LDI.U</code></li>
+<li><code>HL.LDP</code></li>
+<li><code>HL.LH.PO</code></li>
+<li><code>HL.LH.PR</code></li>
+<li><code>HL.LHI</code></li>
+<li><code>HL.LHI.PO</code></li>
+<li><code>HL.LHI.PR</code></li>
+<li><code>HL.LHI.U</code></li>
+<li><code>HL.LHI.UPO</code></li>
+<li><code>HL.LHI.UPR</code></li>
+<li><code>HL.LHIP</code></li>
+<li><code>HL.LHIP.U</code></li>
+<li><code>HL.LHP</code></li>
+<li><code>HL.LHU.PO</code></li>
+<li><code>HL.LHU.PR</code></li>
+<li><code>HL.LHUI</code></li>
+<li><code>HL.LHUI.PO</code></li>
+<li><code>HL.LHUI.PR</code></li>
+<li><code>HL.LHUI.U</code></li>
+<li><code>HL.LHUI.UPO</code></li>
+<li><code>HL.LHUI.UPR</code></li>
+<li><code>HL.LHUIP</code></li>
+<li><code>HL.LHUIP.U</code></li>
+<li><code>HL.LHUP</code></li>
+<li><code>HL.LIS</code></li>
+<li><code>HL.LIU</code></li>
+<li><code>HL.LW.PO</code></li>
+<li><code>HL.LW.PR</code></li>
+<li><code>HL.LWI</code></li>
+<li><code>HL.LWI.U</code></li>
+<li><code>HL.LWI.UPR</code></li>
+<li><code>HL.LWIP.U</code></li>
+<li><code>HL.LWP</code></li>
+<li><code>HL.LWU.PO</code></li>
+<li><code>HL.LWU.PR</code></li>
+<li><code>HL.LWUI</code></li>
+<li><code>HL.LWUI.PO</code></li>
+<li><code>HL.LWUI.U</code></li>
+<li><code>HL.LWUI.UPO</code></li>
+<li><code>HL.LWUI.UPR</code></li>
+<li><code>HL.LWUIP.U</code></li>
+<li><code>HL.LWUP</code></li>
+<li><code>HL.MADD</code></li>
+<li><code>HL.MADDW</code></li>
+<li><code>HL.MIADD</code></li>
+<li><code>HL.MISUB</code></li>
+<li><code>HL.MUL</code></li>
+<li><code>HL.MULU</code></li>
+<li><code>HL.PRF</code></li>
+<li><code>HL.PRF.A</code></li>
+<li><code>HL.PRFI.U</code></li>
+<li><code>HL.PRFI.UA</code></li>
+<li><code>HL.QMT</code></li>
+<li><code>HL.QPOP</code></li>
+<li><code>HL.QPUSH</code></li>
+<li><code>HL.REM</code></li>
+<li><code>HL.REMU</code></li>
+<li><code>HL.REMUW</code></li>
+<li><code>HL.REMW</code></li>
+<li><code>HL.SB.PO</code></li>
+<li><code>HL.SB.PR</code></li>
+<li><code>HL.SBI</code></li>
+<li><code>HL.SBI.PO</code></li>
+<li><code>HL.SBI.PR</code></li>
+<li><code>HL.SBP</code></li>
+<li><code>HL.SD.PO</code></li>
+<li><code>HL.SD.PR</code></li>
+<li><code>HL.SD.UPO</code></li>
+<li><code>HL.SD.UPR</code></li>
+<li><code>HL.SDP</code></li>
+<li><code>HL.SDP.U</code></li>
+<li><code>HL.SETC.ANDI</code></li>
+<li><code>HL.SETC.EQI</code></li>
+<li><code>HL.SETC.GEI</code></li>
+<li><code>HL.SETC.GEUI</code></li>
+<li><code>HL.SETC.LTI</code></li>
+<li><code>HL.SETC.LTUI</code></li>
+<li><code>HL.SETC.NEI</code></li>
+<li><code>HL.SETC.ORI</code></li>
+<li><code>HL.SETRET</code></li>
+<li><code>HL.SH.PO</code></li>
+<li><code>HL.SH.PR</code></li>
+<li><code>HL.SH.UPO</code></li>
+<li><code>HL.SH.UPR</code></li>
+<li><code>HL.SHI</code></li>
+<li><code>HL.SHI.PO</code></li>
+<li><code>HL.SHI.PR</code></li>
+<li><code>HL.SHI.U</code></li>
+<li><code>HL.SHI.UPO</code></li>
+<li><code>HL.SHI.UPR</code></li>
+<li><code>HL.SHP</code></li>
+<li><code>HL.SHP.U</code></li>
+<li><code>HL.SW.PO</code></li>
+<li><code>HL.SW.PR</code></li>
+<li><code>HL.SW.UPO</code></li>
+<li><code>HL.SW.UPR</code></li>
+<li><code>HL.SWI</code></li>
+<li><code>HL.SWI.U</code></li>
+<li><code>HL.SWI.UPR</code></li>
+<li><code>HL.SWP</code></li>
+<li><code>HL.SWP.U</code></li>
+<li><code>IC.IALL</code></li>
+<li><code>IC.IVA</code></li>
+<li><code>J</code></li>
+<li><code>JR</code></li>
+<li><code>LD.AND</code></li>
+<li><code>LD.OR</code></li>
+<li><code>LD.SMAX</code></li>
+<li><code>LD.SMIN</code></li>
+<li><code>LD.UMAX</code></li>
+<li><code>LD.UMIN</code></li>
+<li><code>LD.XOR</code></li>
+<li><code>LDI.U</code></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "navigation.top", "search.suggest", "search.highlight"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

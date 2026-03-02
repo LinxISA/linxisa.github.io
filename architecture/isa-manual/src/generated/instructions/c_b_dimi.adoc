@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_b_dimi]]
+==== C.B.DIMI
+
+*Syntax:* C.B.DIMI imm, ->{LB0, LB1, LB2}
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_b_dimi.svg[C.B.DIMI encoding,width=800]
+
+*Uop-Class:* CMD
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"cmd_kind": "BLOCK_DIMENSION", "note": "User confirmed A", "source": "group_rule", "uop_kind": "CMD"}`

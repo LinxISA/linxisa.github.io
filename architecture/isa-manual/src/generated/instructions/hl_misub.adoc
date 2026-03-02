@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_hl_misub]]
+==== HL.MISUB
+
+*Syntax:* hl.misub SrcL, SrcR, uimm, ->{t, u, Rd}
+
+*Description:* Long (48-bit) instruction encoding.
+
+*Encoding:*
+
+image::../generated/encodings/enc_hl_misub.svg[HL.MISUB encoding,width=800]
+
+*Uop-Class:* ALU
+
+*Compression:* HL48 (len=48)
+
+*Uop-Class payload:* `{"note": "override: RSV category removed; HL.BFI/HL.MIADD/HL.MISUB are ALU", "source": "override", "uop_kind": "ALU"}`

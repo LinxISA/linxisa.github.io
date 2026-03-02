@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_cmp_eqi]]
+==== C.CMP.EQI
+
+*Syntax:* c.cmp.eqi t#1, simm, ->t
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_cmp_eqi.svg[C.CMP.EQI encoding,width=800]
+
+*Uop-Class:* BRU
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"bru_kind": "CMP", "note": "C.TINST split", "source": "override", "uop_kind": "BRU"}`

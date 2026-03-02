@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_hl_remuw]]
+==== HL.REMUW
+
+*Syntax:* hl.remuw SrcL, SrcR, ->Dst0, Dst1
+
+*Description:* Long (48-bit) instruction encoding.
+
+*Encoding:*
+
+image::../generated/encodings/enc_hl_remuw.svg[HL.REMUW encoding,width=800]
+
+*Uop-Class:* ALU
+
+*Compression:* HL48 (len=48)
+
+*Uop-Class payload:* `{"alu_kind": "ALU_MULTI_CYCLE", "source": "group_rule", "uop_kind": "ALU"}`

@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_bstop]]
+==== C.BSTOP
+
+*Syntax:* C.BSTOP
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_bstop.svg[C.BSTOP encoding,width=800]
+
+*Uop-Class:* CMD
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"cmd_kind": "BLOCK_SPLIT", "note": "User corrected to A", "source": "group_rule", "uop_kind": "CMD"}`

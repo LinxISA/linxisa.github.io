@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_bstart_std]]
+==== C.BSTART.STD
+
+*Syntax:* C.BSTART.STD BrType
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_bstart_std.svg[C.BSTART.STD encoding,width=800]
+
+*Uop-Class:* BBD
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"bbd_kind": "BSTART", "note": "User confirmed A (compressed boundary)", "source": "group_rule", "uop_kind": "BBD"}`

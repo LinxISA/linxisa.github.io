@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+# Keep versions compatible with the repo’s system Ruby (macOS currently ships Ruby 2.6.x in many setups).
+gem "asciidoctor", "~> 2.0"
+gem "asciidoctor-pdf", "~> 1.6"
+gem "rouge", "~> 3.0"

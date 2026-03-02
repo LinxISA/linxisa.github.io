@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_cmp_geui]]
+==== CMP.GEUI
+
+*Syntax:* cmp.geui SrcL, uimm, ->{t, u, Rd}
+
+*Description:* -
+
+*Encoding:*
+
+image::../generated/encodings/enc_cmp_geui.svg[CMP.GEUI encoding,width=800]
+
+*Uop-Class:* BRU
+
+*Compression:* L32 (len=32)
+
+*Uop-Class payload:* `{"bru_kind": "CMP", "source": "group_rule", "uop_kind": "BRU"}`

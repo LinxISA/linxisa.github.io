@@ -1,0 +1,20 @@
+---
+// Auto-generated instruction documentation
+// Do not edit by hand
+
+[[inst_c_slli]]
+==== C.SLLI
+
+*Syntax:* c.slli t#1, uimm, ->t
+
+*Description:* Compressed instruction variant (16-bit encoding).
+
+*Encoding:*
+
+image::../generated/encodings/enc_c_slli.svg[C.SLLI encoding,width=800]
+
+*Uop-Class:* ALU
+
+*Compression:* C16 (len=16)
+
+*Uop-Class payload:* `{"alu_kind": "SHIFT", "note": "C.TINST split", "source": "override", "uop_kind": "ALU"}`
